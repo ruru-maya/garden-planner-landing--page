@@ -3,11 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Garden Planner — Design Your Dream Garden</title>
+  <title>CozyGrow — Create the Garden You Always Imagined</title>
   <meta name="description" content="Plan, visualize, and grow your perfect garden. Drag-and-drop layout tools, smart plant databases, and AI-powered suggestions — all in your browser." />
-  <meta property="og:title" content="Garden Planner — Design Your Dream Garden" />
+  <link rel="canonical" href="https://cozygrowgarden.com/" />
+  <meta property="og:title" content="CozyGrow — Create the Garden You Always Imagined" />
   <meta property="og:description" content="Plan, visualize, and grow your perfect garden with our intuitive drag-and-drop garden layout tool." />
+  <meta property="og:url" content="https://cozygrowgarden.com/" />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="CozyGrow" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CozyGrow — Create the Garden You Always Imagined" />
+  <meta name="twitter:description" content="Plan, visualize, and grow your perfect garden with our intuitive drag-and-drop garden layout tool." />
+  <!-- Pinterest domain verification — replace content value after verifying cozygrowgarden.com in Pinterest -->
   <meta name="p:domain_verify" content="3f69746d3ba0e0f8ea4b504560e9745b"/>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -149,6 +156,8 @@
 
     .footer{padding:2.5rem 0;border-top:1px solid rgba(59,47,42,.06);text-align:center}
     .footer p{font-size:.8rem;color:var(--c-bark-70)}
+    .footer a{color:var(--c-leaf);font-weight:500;transition:color .2s}
+    .footer a:hover{color:var(--c-leaf-dk);text-decoration:underline}
 
     .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
     .reveal.visible{opacity:1;transform:translateY(0)}
@@ -176,12 +185,12 @@
 
 <nav class="topbar" id="topbar">
   <div class="wrap topbar__inner">
-    <a href="#" class="topbar__logo">
+    <a href="/" class="topbar__logo">
       <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" stroke="currentColor" stroke-width="1.5"/><path d="M14 6c0 5-4 8-4 12a4 4 0 0 0 8 0c0-4-4-7-4-12Z" fill="currentColor" opacity=".25"/><path d="M14 6c0 5-4 8-4 12a4 4 0 0 0 8 0c0-4-4-7-4-12Z" stroke="currentColor" stroke-width="1.3"/></svg>
-      Garden Planner
+      CozyGrow
     </a>
     <div class="topbar__cta">
-      <a href="https://mygardenplanner.app/" class="btn btn--primary" target="_blank" rel="noopener">Start Planning Free <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 10h10M11 6l4 4-4 4"/></svg></a>
+      <a href="https://mygardenplanner.app/" class="btn btn--primary" target="_blank" rel="noopener">Open Garden Planner <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 10h10M11 6l4 4-4 4"/></svg></a>
     </div>
   </div>
 </nav>
@@ -191,10 +200,10 @@
   <div class="wrap hero__grid">
     <div>
       <div class="hero__badge reveal"><span>🌱</span> Free &amp; browser-based</div>
-      <h1 class="reveal reveal-d1">Design Your<br>Dream <em>Garden</em></h1>
-      <p class="hero__sub reveal reveal-d2">Plan layouts, track plants, and watch your garden come to life — with an intuitive drag-and-drop planner built for gardeners of every skill level.</p>
+      <h1 class="reveal reveal-d1">Create the Garden<br>You Always <em>Imagined</em></h1>
+      <p class="hero__sub reveal reveal-d2">Track planting dates, harvests, and lessons so your garden improves year after year — with an intuitive planner built for gardeners of every skill level.</p>
       <div class="hero__actions reveal reveal-d3">
-        <a href="https://mygardenplanner.app/" class="btn btn--primary" target="_blank" rel="noopener">Open Garden Planner <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 10h10M11 6l4 4-4 4"/></svg></a>
+        <a href="https://mygardenplanner.app/" class="btn btn--primary" target="_blank" rel="noopener">Start Your Garden Journal <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 10h10M11 6l4 4-4 4"/></svg></a>
         <a href="#benefits" class="btn btn--outline">See What's Inside</a>
       </div>
     </div>
@@ -246,7 +255,7 @@
 <section class="proof">
   <div class="wrap proof__inner">
     <div class="proof__item"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16Zm3.7 6.3a.75.75 0 0 1 0 1.06l-4 4a.75.75 0 0 1-1.06 0l-2-2a.75.75 0 1 1 1.06-1.06L9.17 11.77l3.47-3.47a.75.75 0 0 1 1.06 0Z"/></svg> 100% Free to use</div>
-    <div class="proof__item"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16Zm3.7 6.3a.75.75 0 0 1 0 1.06l-4 4a.75.75 0 0 1-1.06 0l-2-2a.75.75 0 1 1 1.06-1.06L9.17 11.77l3.47-3.47a.75.75 0 0 1 1.06 0Z"/></svg> No signup required</div>
+    <div class="proof__item"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16Zm3.7 6.3a.75.75 0 0 1 0 1.06l-4 4a.75.75 0 0 1-1.06 0l-2-2a.75.75 0 1 1 1.06-1.06L9.17 11.77l3.47-3.47a.75.75 0 0 1 1.06 0Z"/></svg> No download required</div>
     <div class="proof__item"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16Zm3.7 6.3a.75.75 0 0 1 0 1.06l-4 4a.75.75 0 0 1-1.06 0l-2-2a.75.75 0 1 1 1.06-1.06L9.17 11.77l3.47-3.47a.75.75 0 0 1 1.06 0Z"/></svg> Works in any browser</div>
     <div class="proof__item"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16Zm3.7 6.3a.75.75 0 0 1 0 1.06l-4 4a.75.75 0 0 1-1.06 0l-2-2a.75.75 0 1 1 1.06-1.06L9.17 11.77l3.47-3.47a.75.75 0 0 1 1.06 0Z"/></svg> Built for real gardeners</div>
   </div>
@@ -371,7 +380,11 @@
   </div>
 </section>
 
-<footer class="footer"><div class="wrap"><p>&copy; 2026 Garden Planner. Made with 🌱 for gardeners everywhere. &nbsp;·&nbsp; <a href="imprint.html" style="color:var(--c-leaf);font-weight:500;">Imprint &amp; Photo Credits</a></p></div></footer>
+<footer class="footer">
+  <div class="wrap">
+    <p>&copy; 2026 CozyGrow. Made with 🌱 for gardeners everywhere. &nbsp;&middot;&nbsp; <a href="/imprint">Imprint &amp; Photo Credits</a></p>
+  </div>
+</footer>
 
 <script>
   const topbar=document.getElementById('topbar');

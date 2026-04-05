@@ -1,0 +1,44 @@
+{
+  "rewrites": [
+    { "source": "/imprint", "destination": "/imprint.html" },
+    { "source": "/tips", "destination": "/tips/index.html" },
+    { "source": "/planner", "destination": "/planner.html" },
+    { "source": "/seasonal", "destination": "/seasonal.html" },
+    { "source": "/tips/:slug", "destination": "/tips/:slug.html" }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "mygardenplanner.online" }],
+      "destination": "https://cozygrowgarden.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.mygardenplanner.online" }],
+      "destination": "https://cozygrowgarden.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.cozygrowgarden.com" }],
+      "destination": "https://cozygrowgarden.com/:path*",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/tips/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=86400" }
+      ]
+    },
+    {
+      "source": "/(.*).html",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" }
+      ]
+    }
+  ]
+}
