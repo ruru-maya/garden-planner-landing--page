@@ -1,44 +1,29 @@
 {
-  "rewrites": [
-    { "source": "/imprint", "destination": "/imprint.html" },
-    { "source": "/tips", "destination": "/tips/index.html" },
-    { "source": "/planner", "destination": "/planner.html" },
-    { "source": "/seasonal", "destination": "/seasonal.html" },
-    { "source": "/tips/:slug", "destination": "/tips/:slug.html" }
-  ],
-  "redirects": [
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "mygardenplanner.online" }],
-      "destination": "https://cozygrowgarden.com/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.mygardenplanner.online" }],
-      "destination": "https://cozygrowgarden.com/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.cozygrowgarden.com" }],
-      "destination": "https://cozygrowgarden.com/:path*",
-      "permanent": true
-    }
-  ],
+  "cleanUrls": true,
+  "trailingSlash": false,
   "headers": [
     {
-      "source": "/tips/(.*)",
+      "source": "/content/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=86400" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=86400"
+        }
       ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/guides/:slug",
+      "destination": "/content/guides/:slug/index.html"
     },
     {
-      "source": "/(.*).html",
-      "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" }
-      ]
+      "source": "/beginner-gardening/:slug",
+      "destination": "/content/beginner-gardening/:slug/index.html"
+    },
+    {
+      "source": "/:category/:slug",
+      "destination": "/content/:category/:slug/index.html"
     }
   ]
 }
