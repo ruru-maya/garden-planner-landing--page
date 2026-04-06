@@ -3,27 +3,16 @@
   "trailingSlash": false,
   "headers": [
     {
-      "source": "/content/(.*)",
+      "source": "/(.*)",
       "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600, s-maxage=86400"
-        }
+        { "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=86400" }
       ]
     }
   ],
   "rewrites": [
     {
-      "source": "/guides/:slug",
-      "destination": "/content/guides/:slug/index.html"
-    },
-    {
       "source": "/beginner-gardening/:slug",
       "destination": "/content/beginner-gardening/:slug/index.html"
-    },
-    {
-      "source": "/:category/:slug",
-      "destination": "/content/:category/:slug/index.html"
     }
   ]
 }

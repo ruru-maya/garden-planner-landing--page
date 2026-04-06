@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CozyGrow — Garden Planner That Actually Gets It Done</title>
+<meta name="description" content="Plan your dream garden with CozyGrow. Drag-and-drop layout, smart plant guides, and seasonal reminders — all in one beautiful app.">
+<meta property="og:title" content="CozyGrow — Garden Planner That Actually Gets It Done">
+<meta property="og:description" content="Plan your dream garden with CozyGrow. Drag-and-drop layout, smart plant guides, and seasonal reminders.">
+<meta property="og:image" content="https://images.pexels.com/photos/7457039/pexels-photo-7457039.jpeg?auto=compress&cs=tinysrgb&w=1200">
+<meta property="og:url" content="https://cozygrowgarden.com">
+<meta name="pinterest-site-verification" content="3f69746d3ba0e0f8ea4b504560e9745b">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+
+<!--
+  PHOTOS: All images from Pexels.com — free for commercial use.
+  Images will NOT render in Claude's artifact preview (sandboxed iframe).
+  Open in a real browser or on Vercel to see them.
+-->
+
+<style>
+  :root {
+    --bg:       #FDFAF6;
+    --bg-alt:   #F2EDE4;
+    --green:    #4A7C59;
+    --green-dk: #366245;
+    --rust:     #C4622D;
+    --bark:     #2C2417;
+    --muted:    #7A6A57;
+    --border:   rgba(44,36,23,.1);
+    --ff-head:  'Fraunces', Georgia, serif;
+    --ff-body:  'DM Sans', system-ui, sans-serif;
+    --radius:   12px;
+    --shadow:   0 4px 24px rgba(44,36,23,.1);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--ff-body);
+    background: var(--bg);
+    color: var(--bark);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+
+  /* ── NAV ── */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(253,250,246,.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav__inner {
+    max-width: 1160px; margin: 0 auto;
+    padding: .9rem 1.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav__logo {
+    font-family: var(--ff-head); font-size: 1.3rem; font-weight: 700;
+    color: var(--bark);
+  }
+  .nav__logo span { color: var(--green); }
+  .nav__links { display: flex; align-items: center; gap: 1.75rem; }
+  .nav__links a {
+    font-size: .9rem; font-weight: 500; color: var(--muted);
+    transition: color .2s;
+  }
+  .nav__links a:hover { color: var(--bark); }
+  .btn {
+    display: inline-block;
+    background: var(--green); color: #fff;
+    font-family: var(--ff-body); font-weight: 600; font-size: .9rem;
+    padding: .6rem 1.4rem; border-radius: 8px;
+    transition: background .2s, transform .15s;
+  }
+  .btn:hover { background: var(--green-dk); transform: translateY(-1px); }
+  .btn--lg { font-size: 1.05rem; padding: .85rem 2.2rem; border-radius: 10px; }
+  .btn--outline {
+    background: transparent; color: var(--green);
+    border: 2px solid var(--green);
+  }
+  .btn--outline:hover { background: var(--green); color: #fff; }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 88vh;
+    display: flex; align-items: center;
+    overflow: hidden;
+  }
+  .hero__bg {
+    position: absolute; inset: 0;
+    background: url('https://images.pexels.com/photos/7457039/pexels-photo-7457039.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover no-repeat;
+  }
+  .hero__bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(105deg, rgba(44,36,23,.72) 0%, rgba(44,36,23,.35) 60%, transparent 100%);
+  }
+  .hero__content {
+    position: relative; z-index: 1;
+    max-width: 1160px; margin: 0 auto; padding: 6rem 1.5rem;
+    color: #fff;
+  }
+  .hero__tag {
+    display: inline-block;
+    background: rgba(255,255,255,.18); backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,.3);
+    font-size: .78rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    padding: .35rem 1rem; border-radius: 999px; margin-bottom: 1.5rem;
+  }
+  .hero__title {
+    font-family: var(--ff-head); font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 800; line-height: 1.1; max-width: 680px;
+    margin-bottom: 1.25rem;
+  }
+  .hero__title em { font-style: italic; color: #A8D5A2; }
+  .hero__sub {
+    font-size: clamp(1rem, 2vw, 1.2rem); max-width: 500px;
+    opacity: .88; margin-bottom: 2.5rem; line-height: 1.65;
+  }
+  .hero__cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  /* ── PHOTO STRIP ── */
+  .strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    height: 240px; overflow: hidden;
+  }
+  .strip__img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform .5s ease;
+  }
+  .strip__img:hover { transform: scale(1.04); }
+
+  /* ── SECTION SHARED ── */
+  .section { padding: 6rem 1.5rem; }
+  .section__inner { max-width: 1160px; margin: 0 auto; }
+  .section__label {
+    display: inline-block;
+    font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--green); margin-bottom: .75rem;
+  }
+  .section__title {
+    font-family: var(--ff-head); font-size: clamp(1.9rem, 4vw, 2.8rem);
+    font-weight: 700; line-height: 1.2; margin-bottom: 1rem;
+  }
+  .section__sub {
+    font-size: 1.05rem; color: var(--muted); max-width: 560px;
+    line-height: 1.7;
+  }
+
+  /* ── FEATURES ── */
+  .features { background: var(--bg-alt); }
+  .features__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem; margin-top: 3.5rem;
+  }
+  .feature-card {
+    background: var(--bg); border-radius: var(--radius);
+    padding: 2rem; border: 1px solid var(--border);
+    transition: box-shadow .25s, transform .25s;
+  }
+  .feature-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+  .feature-card__icon {
+    width: 48px; height: 48px;
+    background: #EBF3EC; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; margin-bottom: 1.25rem;
+  }
+  .feature-card__title {
+    font-family: var(--ff-head); font-size: 1.15rem; font-weight: 700;
+    margin-bottom: .5rem;
+  }
+  .feature-card__desc { font-size: .925rem; color: var(--muted); line-height: 1.65; }
+
+  /* ── SHOWCASE ── */
+  .showcase__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center;
+    margin-top: 4rem;
+  }
+  .showcase__imgs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .75rem;
+  }
+  .showcase__img {
+    border-radius: var(--radius); overflow: hidden;
+    aspect-ratio: 3/4; width: 100%;
+  }
+  .showcase__img img { width: 100%; height: 100%; object-fit: cover; }
+  .showcase__img:first-child { grid-row: span 2; aspect-ratio: 2/3; }
+  .showcase__text h2 {
+    font-family: var(--ff-head); font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 700; line-height: 1.2; margin-bottom: 1.25rem;
+  }
+  .showcase__text p { color: var(--muted); line-height: 1.75; margin-bottom: 1rem; }
+  .showcase__list { list-style: none; margin: 1.5rem 0 2rem; }
+  .showcase__list li {
+    display: flex; align-items: flex-start; gap: .75rem;
+    font-size: .95rem; color: var(--muted); padding: .4rem 0;
+  }
+  .showcase__list li::before {
+    content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0;
+    margin-top: .05rem;
+  }
+
+  /* ── PRICING ── */
+  .pricing { background: var(--bg-alt); }
+  .pricing__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-top: 3.5rem;
+    max-width: 900px;
+  }
+  .price-card {
+    background: var(--bg); border-radius: var(--radius);
+    padding: 2rem; border: 1px solid var(--border);
+    position: relative;
+  }
+  .price-card--featured {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(74,124,89,.12);
+  }
+  .price-card__badge {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--green); color: #fff;
+    font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    padding: .3rem .9rem; border-radius: 999px;
+  }
+  .price-card__name {
+    font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700;
+    margin-bottom: .5rem;
+  }
+  .price-card__price {
+    font-family: var(--ff-head); font-size: 2.2rem; font-weight: 800;
+    line-height: 1; margin: .75rem 0;
+  }
+  .price-card__price sup { font-size: 1.1rem; vertical-align: super; }
+  .price-card__period { font-size: .8rem; color: var(--muted); }
+  .price-card__features {
+    list-style: none; margin: 1.25rem 0 1.75rem; font-size: .9rem; color: var(--muted);
+  }
+  .price-card__features li { padding: .35rem 0; border-bottom: 1px solid var(--border); }
+  .price-card__features li:last-child { border: none; }
+
+  /* ── ARTICLES SECTION ── */
+  .articles { background: var(--bg); }
+  .articles__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem; margin-top: 3rem;
+  }
+  .article-card {
+    border-radius: var(--radius); overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    transition: box-shadow .25s, transform .25s;
+    display: flex; flex-direction: column;
+  }
+  .article-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+  .article-card__img {
+    height: 220px; overflow: hidden;
+  }
+  .article-card__img img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform .5s ease;
+  }
+  .article-card:hover .article-card__img img { transform: scale(1.04); }
+  .article-card__body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+  .article-card__cat {
+    font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--green); margin-bottom: .6rem;
+  }
+  .article-card__title {
+    font-family: var(--ff-head); font-size: 1.2rem; font-weight: 700;
+    line-height: 1.3; margin-bottom: .75rem;
+  }
+  .article-card__excerpt { font-size: .9rem; color: var(--muted); line-height: 1.65; flex: 1; }
+  .article-card__link {
+    display: inline-flex; align-items: center; gap: .4rem;
+    margin-top: 1.25rem; font-size: .875rem; font-weight: 600;
+    color: var(--green); transition: gap .2s;
+  }
+  .article-card:hover .article-card__link { gap: .65rem; }
+
+  /* ── BANNER ── */
+  .banner {
+    position: relative; overflow: hidden;
+    min-height: 420px; display: flex; align-items: center;
+  }
+  .banner__bg {
+    position: absolute; inset: 0;
+    background: url('https://images.pexels.com/photos/434334/pexels-photo-434334.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover no-repeat;
+  }
+  .banner__bg::after {
+    content: ''; position: absolute; inset: 0;
+    background: rgba(44,36,23,.62);
+  }
+  .banner__content {
+    position: relative; z-index: 1;
+    max-width: 1160px; margin: 0 auto; padding: 5rem 1.5rem;
+    text-align: center; color: #fff;
+  }
+  .banner__content h2 {
+    font-family: var(--ff-head); font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800; margin-bottom: 1rem;
+  }
+  .banner__content p { font-size: 1.1rem; opacity: .88; max-width: 520px; margin: 0 auto 2.5rem; }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--bark); color: rgba(255,255,255,.7);
+    font-size: .85rem;
+  }
+  .footer__inner {
+    max-width: 1160px; margin: 0 auto; padding: 2rem 1.5rem;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  }
+  .footer__logo { font-family: var(--ff-head); font-size: 1.1rem; color: #fff; }
+  .footer__logo span { color: #A8D5A2; }
+  .footer__links { display: flex; gap: 1.5rem; }
+  .footer__links a { color: rgba(255,255,255,.6); transition: color .2s; }
+  .footer__links a:hover { color: #fff; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .strip { grid-template-columns: repeat(2, 1fr); height: 320px; }
+    .showcase__grid { grid-template-columns: 1fr; }
+    .showcase__imgs { order: -1; }
+    .pricing__grid { grid-template-columns: 1fr; max-width: 380px; }
+    .nav__links .btn--outline { display: none; }
+    .footer__inner { flex-direction: column; text-align: center; }
+  }
+  @media (max-width: 480px) {
+    .strip { grid-template-columns: repeat(2, 1fr); height: 260px; }
+    .articles__grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="/" class="nav__logo">Cozy<span>Grow</span></a>
+    <div class="nav__links">
+      <a href="#features">Features</a>
+      <a href="#tips">Tips</a>
+      <a href="#pricing">Pricing</a>
+      <a href="https://gardenplanner.app" class="btn btn--outline">Open App</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__bg"></div>
+  <div class="hero__content">
+    <div class="hero__tag">🌱 Free Garden Planner</div>
+    <h1 class="hero__title">Your most beautiful garden starts with a <em>good plan</em></h1>
+    <p class="hero__sub">Drag-and-drop layout, smart plant guides, and seasonal reminders — everything you need to grow with confidence.</p>
+    <div class="hero__cta">
+      <a href="https://gardenplanner.app" class="btn btn--lg">Start planning free →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO STRIP -->
+<div class="strip">
+  <img class="strip__img" src="https://images.pexels.com/photos/4975353/pexels-photo-4975353.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Abundant garden harvest" loading="lazy">
+  <img class="strip__img" src="https://images.pexels.com/photos/7782981/pexels-photo-7782981.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Woman with colorful produce" loading="lazy">
+  <img class="strip__img" src="https://images.pexels.com/photos/9027543/pexels-photo-9027543.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Purple coneflowers in bloom" loading="lazy">
+  <img class="strip__img" src="https://images.pexels.com/photos/175414/pexels-photo-175414.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fresh vegetable harvest" loading="lazy">
+</div>
+
+<!-- FEATURES -->
+<section class="section features" id="features">
+  <div class="section__inner">
+    <span class="section__label">What you get</span>
+    <h2 class="section__title">Everything your garden needs</h2>
+    <p class="section__sub">Built for gardeners who want to spend more time in the dirt and less time guessing what to plant.</p>
+    <div class="features__grid">
+      <div class="feature-card">
+        <div class="feature-card__icon">🗺️</div>
+        <h3 class="feature-card__title">Drag-and-drop garden layout</h3>
+        <p class="feature-card__desc">Design your beds visually. Place plants, move them around, and see your garden take shape before you dig a single hole.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card__icon">🌿</div>
+        <h3 class="feature-card__title">Smart plant database</h3>
+        <p class="feature-card__desc">Hundreds of vegetables, herbs, and flowers with spacing, companion planting, and care guides built in.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card__icon">📅</div>
+        <h3 class="feature-card__title">Seasonal planting calendar</h3>
+        <p class="feature-card__desc">Know exactly when to sow, transplant, and harvest based on your local climate and frost dates.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card__icon">📓</div>
+        <h3 class="feature-card__title">Garden journal</h3>
+        <p class="feature-card__desc">Track what works, what doesn't, and build a record of your garden over the seasons.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWCASE -->
+<section class="section">
+  <div class="section__inner">
+    <div class="showcase__grid">
+      <div class="showcase__imgs">
+        <div class="showcase__img">
+          <img src="https://images.pexels.com/photos/27176057/pexels-photo-27176057.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Woman gardening in raised beds" loading="lazy">
+        </div>
+        <div class="showcase__img">
+          <img src="https://images.pexels.com/photos/12738271/pexels-photo-12738271.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Butterhead lettuce raised bed" loading="lazy">
+        </div>
+        <div class="showcase__img">
+          <img src="https://images.pexels.com/photos/6342170/pexels-photo-6342170.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tomatoes on the vine" loading="lazy">
+        </div>
+      </div>
+      <div class="showcase__text">
+        <span class="section__label">Grow smarter</span>
+        <h2>Plan once. Harvest all season.</h2>
+        <p>Most gardeners learn from expensive trial and error — wrong spacing, wrong timing, wrong companions. CozyGrow puts the knowledge up front so you can skip the mistakes.</p>
+        <ul class="showcase__list">
+          <li>See companion plants and spacing conflicts before you plant</li>
+          <li>Get reminders for watering, feeding, and harvesting</li>
+          <li>Track your notes season by season</li>
+          <li>Works on desktop and mobile — plan anywhere</li>
+        </ul>
+        <a href="https://gardenplanner.app" class="btn">Start your free plan →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section pricing" id="pricing">
+  <div class="section__inner">
+    <span class="section__label">Simple pricing</span>
+    <h2 class="section__title">Start free. Grow as you go.</h2>
+    <p class="section__sub">No credit card required to get started. Upgrade when you're ready.</p>
+    <div class="pricing__grid">
+      <div class="price-card">
+        <p class="price-card__name">Free</p>
+        <p class="price-card__price">$0</p>
+        <p class="price-card__period">forever</p>
+        <ul class="price-card__features">
+          <li>1 garden layout</li>
+          <li>Basic plant database</li>
+          <li>Planting calendar</li>
+          <li>Garden journal</li>
+        </ul>
+        <a href="https://gardenplanner.app" class="btn btn--outline" style="width:100%;text-align:center;">Get started free</a>
+      </div>
+      <div class="price-card price-card--featured">
+        <div class="price-card__badge">Most popular</div>
+        <p class="price-card__name">Pro</p>
+        <p class="price-card__price"><sup>$</sup>1<span style="font-size:1.1rem">.99</span></p>
+        <p class="price-card__period">per month</p>
+        <ul class="price-card__features">
+          <li>Unlimited garden layouts</li>
+          <li>Full plant database</li>
+          <li>Smart harvest reminders</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="https://gardenplanner.app" class="btn" style="width:100%;text-align:center;">Try Pro</a>
+      </div>
+      <div class="price-card">
+        <p class="price-card__name">Lifetime</p>
+        <p class="price-card__price"><sup>$</sup>9<span style="font-size:1.1rem">.99</span></p>
+        <p class="price-card__period">one-time payment</p>
+        <ul class="price-card__features">
+          <li>Everything in Pro</li>
+          <li>All future features</li>
+          <li>No recurring fees</li>
+          <li>Support indie dev 🌱</li>
+        </ul>
+        <a href="https://gardenplanner.app" class="btn btn--outline" style="width:100%;text-align:center;">Get lifetime</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARTICLES -->
+<section class="section articles" id="tips">
+  <div class="section__inner">
+    <span class="section__label">Garden tips</span>
+    <h2 class="section__title">Grow with confidence</h2>
+    <p class="section__sub">Practical guides written for real gardeners — whether you have a balcony or a backyard.</p>
+    <div class="articles__grid">
+      <a href="/beginner-gardening/7-garden-planning-tips-for-beginners" class="article-card">
+        <div class="article-card__img">
+          <img src="https://images.pexels.com/photos/6508835/pexels-photo-6508835.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Gardener planting seeds" loading="lazy">
+        </div>
+        <div class="article-card__body">
+          <p class="article-card__cat">Beginner Gardening</p>
+          <h3 class="article-card__title">7 Garden Planning Tips for Beginners</h3>
+          <p class="article-card__excerpt">Starting a garden is one of the most rewarding things you can do — but it's easy to feel overwhelmed. These seven tips will help you plan with confidence from day one.</p>
+          <span class="article-card__link">Read the guide →</span>
+        </div>
+      </a>
+      <a href="/beginner-gardening/your-future-harvest-starts-today" class="article-card">
+        <div class="article-card__img">
+          <img src="https://images.pexels.com/photos/4975353/pexels-photo-4975353.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Farmer holding abundant harvest basket" loading="lazy">
+        </div>
+        <div class="article-card__body">
+          <p class="article-card__cat">Beginner Gardening</p>
+          <h3 class="article-card__title">Your Future Harvest Starts Today</h3>
+          <p class="article-card__excerpt">The secret to a generous autumn harvest isn't luck — it's a plan made in spring. Learn how to work backwards from your dinner table to your seed packet.</p>
+          <span class="article-card__link">Read the guide →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- BANNER CTA -->
+<section class="banner">
+  <div class="banner__bg"></div>
+  <div class="banner__content">
+    <h2>Ready to grow your best garden yet?</h2>
+    <p>Join thousands of gardeners who plan smarter, plant better, and harvest more.</p>
+    <a href="https://gardenplanner.app" class="btn btn--lg">Start planning free — it's free →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__inner">
+    <span class="footer__logo">Cozy<span>Grow</span> &copy; 2026</span>
+    <nav class="footer__links">
+      <a href="/imprint">Imprint</a>
+      <a href="https://gardenplanner.app">Garden Planner App</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
