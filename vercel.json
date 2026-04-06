@@ -8,11 +8,5 @@
         { "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=86400" }
       ]
     }
-  ],
-  "rewrites": [
-    {
-      "source": "/beginner-gardening/:slug",
-      "destination": "/content/beginner-gardening/:slug/index.html"
-    }
   ]
 }

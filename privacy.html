@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Garden Planner</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --c-cream:#F7F3ED;--c-sand:#E8E0D4;--c-bark:#3B2F2A;--c-bark-70:rgba(59,47,42,.7);
+      --c-leaf:#4A7C59;--c-leaf-dk:#3A6347;--c-white:#FFFFFF;
+      --ff-display:'DM Serif Display',Georgia,serif;--ff-body:'Outfit',system-ui,sans-serif;
+      --max-w:800px;--radius:14px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--ff-body);font-weight:400;color:var(--c-bark);background:var(--c-cream);line-height:1.65;-webkit-font-smoothing:antialiased}
+    a{color:var(--c-leaf);text-decoration:none;transition:color .2s}
+    a:hover{color:var(--c-leaf-dk);text-decoration:underline}
+    .wrap{width:90%;max-width:var(--max-w);margin-inline:auto}
+
+    .header{padding:2rem 0;border-bottom:1px solid rgba(59,47,42,.08)}
+    .header__inner{display:flex;align-items:center;justify-content:space-between}
+    .header__logo{font-family:var(--ff-display);font-size:1.25rem;color:var(--c-leaf);display:flex;align-items:center;gap:.5rem;text-decoration:none}
+    .header__logo:hover{text-decoration:none}
+    .header__logo svg{width:24px;height:24px}
+    .header__back{font-size:.85rem;font-weight:500;color:var(--c-bark-70)}
+    .header__back:hover{color:var(--c-leaf)}
+
+    .content{padding:clamp(2.5rem,6vw,4rem) 0 3rem}
+    .content h1{font-family:var(--ff-display);font-weight:400;font-size:clamp(1.8rem,3vw,2.4rem);margin-bottom:.5rem}
+    .content .subtitle{font-size:.9rem;color:var(--c-bark-70);margin-bottom:2.5rem}
+    .content h2{font-family:var(--ff-display);font-size:1.2rem;margin:2rem 0 .8rem}
+    .content p{font-size:.9rem;color:var(--c-bark-70);line-height:1.75;margin-bottom:1rem;max-width:650px}
+    .content ul{padding-left:1.5rem;margin-bottom:1rem}
+    .content li{font-size:.9rem;color:var(--c-bark-70);line-height:1.75;margin-bottom:.3rem}
+    .content strong{color:var(--c-bark);font-weight:600}
+
+    .footer{padding:2rem 0;border-top:1px solid rgba(59,47,42,.06);text-align:center}
+    .footer p{font-size:.78rem;color:var(--c-bark-70)}
+    .footer a{color:var(--c-leaf);font-weight:500}
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="wrap header__inner">
+    <a href="/" class="header__logo">
+      <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" stroke="currentColor" stroke-width="1.5"/><path d="M14 6c0 5-4 8-4 12a4 4 0 0 0 8 0c0-4-4-7-4-12Z" fill="currentColor" opacity=".25"/><path d="M14 6c0 5-4 8-4 12a4 4 0 0 0 8 0c0-4-4-7-4-12Z" stroke="currentColor" stroke-width="1.3"/></svg>
+      Garden Planner
+    </a>
+    <a href="/" class="header__back">&larr; Back to Home</a>
+  </div>
+</header>
+
+<main class="content">
+  <div class="wrap">
+    <h1>Privacy Policy</h1>
+    <p class="subtitle">Last updated: April 6, 2026</p>
+
+    <h2>Overview</h2>
+    <p>We operate the website cozygrowgarden.com and the Garden Planner application at mygardenplanner.app. We are committed to protecting your privacy.</p>
+
+    <h2>What We Collect</h2>
+    <ul>
+      <li><strong>Account data:</strong> If you create an account, we store your email address and authentication credentials securely via Supabase.</li>
+      <li><strong>Garden data:</strong> Garden layouts, plant selections, and settings you save are stored in your account.</li>
+      <li><strong>Location data:</strong> If you use the weather feature, your approximate location is stored locally in your browser and is never sent to our servers.</li>
+      <li><strong>Analytics:</strong> We may use privacy-friendly analytics. No personal data is shared with third parties for advertising.</li>
+    </ul>
+
+    <h2>How We Use Your Data</h2>
+    <p>Your data is used solely to provide and improve the Garden Planner service. We do not sell, rent, or share your personal information with third parties for marketing purposes.</p>
+
+    <h2>Cookies</h2>
+    <p>We use essential cookies for authentication and session management. We do not use tracking cookies or third-party advertising cookies.</p>
+
+    <h2>Third-Party Services</h2>
+    <ul>
+      <li><strong>Supabase:</strong> Database and authentication</li>
+      <li><strong>Stripe:</strong> Payment processing for Pro subscriptions — we never see or store your credit card details</li>
+      <li><strong>Vercel:</strong> Website hosting</li>
+      <li><strong>Open-Meteo:</strong> Weather data (no personal data sent, only coordinates)</li>
+    </ul>
+
+    <h2>Your Rights</h2>
+    <p>You can request deletion of your account and all associated data at any time by contacting us through the app. Under GDPR and similar regulations, you have the right to access, correct, or delete your personal data.</p>
+
+    <h2>Contact</h2>
+    <p>For privacy-related questions, please reach out via the Garden Planner app at <a href="https://mygardenplanner.app/">mygardenplanner.app</a>.</p>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p>&copy; 2026 Garden Planner. Made with 🌱 for gardeners everywhere. &nbsp;&middot;&nbsp; <a href="/imprint">Imprint &amp; Photo Credits</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
