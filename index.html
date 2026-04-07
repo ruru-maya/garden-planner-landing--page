@@ -132,8 +132,14 @@
     .feat h4{font-size:.95rem;font-weight:600;margin-bottom:.2rem}
     .feat p{font-size:.82rem;color:var(--c-bark-70);line-height:1.6}
 
-    /* ARTICLES — NEW SECTION */
+    /* ARTICLES — preview section, links to /tips */
     .articles{padding:clamp(4rem,10vw,7rem) 0;background:var(--c-sand)}
+    .articles__header{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;margin-bottom:3rem;flex-wrap:wrap}
+    .articles__header-text{max-width:560px}
+    .articles__view-all{flex-shrink:0;display:inline-flex;align-items:center;gap:.4rem;font-size:.9rem;font-weight:600;color:var(--c-leaf);padding:.6rem 1.2rem;border:2px solid var(--c-leaf);border-radius:50px;transition:all .3s var(--ease-out);white-space:nowrap}
+    .articles__view-all:hover{background:var(--c-leaf);color:var(--c-white);transform:translateY(-2px)}
+    .articles__view-all svg{width:16px;height:16px;transition:transform .3s var(--ease-out)}
+    .articles__view-all:hover svg{transform:translateX(3px)}
     .articles__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
     .article-card{background:var(--c-white);border-radius:var(--radius);overflow:hidden;border:1px solid rgba(59,47,42,.06);transition:transform .4s var(--ease-out),box-shadow .4s var(--ease-out);text-decoration:none;color:inherit;display:block}
     .article-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(59,47,42,.1)}
@@ -178,6 +184,7 @@
       .how__steps{grid-template-columns:1fr}
       .showcase__grid{grid-template-columns:1fr}.showcase__photo{order:-1}
       .topbar__nav-link{display:none}
+      .articles__header{flex-direction:column;align-items:flex-start}
     }
     @media(max-width:500px){
       .topbar__inner{height:56px}.topbar__logo{font-size:1.15rem}
@@ -195,7 +202,7 @@
     </a>
     <div class="topbar__nav">
       <a href="#benefits" class="topbar__nav-link">Features</a>
-      <a href="#tips" class="topbar__nav-link">Tips</a>
+      <a href="/tips" class="topbar__nav-link">Tips</a>
       <div class="topbar__cta">
         <a href="https://mygardenplanner.app/" class="btn btn--primary" target="_blank" rel="noopener">Start Planning Free <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 10h10M11 6l4 4-4 4"/></svg></a>
       </div>
@@ -321,14 +328,30 @@
   </div>
 </section>
 
-<!-- NEW: Gardening Tips section -->
+<!-- Gardening Tips preview — shows 2 latest, "View all" button links to /tips -->
 <section class="articles" id="tips">
   <div class="wrap">
-    <p class="section-label reveal">Gardening Tips</p>
-    <h2 class="section-title reveal reveal-d1">Grow smarter with<br>our latest guides</h2>
-    <p class="section-sub reveal reveal-d2">Practical advice for gardeners at every level — from first-time planters to seasoned growers.</p>
+    <div class="articles__header">
+      <div class="articles__header-text">
+        <p class="section-label reveal">Gardening Tips</p>
+        <h2 class="section-title reveal reveal-d1" style="margin-bottom:.5rem">Grow smarter with<br>our latest guides</h2>
+        <p class="section-sub reveal reveal-d2" style="margin-bottom:0">Practical advice for gardeners at every level.</p>
+      </div>
+      <a href="/tips" class="articles__view-all reveal reveal-d2">View all tips <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+    </div>
     <div class="articles__grid">
-      <a href="/7-garden-planning-tips-for-beginners" class="article-card reveal">
+      <a href="/garden-tracker-for-better-harvests" class="article-card reveal">
+        <div class="article-card__img">
+          <img src="https://klpmfclyheooiyffaize.supabase.co/storage/v1/object/public/generated-images/3f7f26b3-4260-44db-b2ff-ed3cb1b62c4f/pin-1775501463259-i5yicb.png" alt="Garden Tracker for Better Harvests" loading="lazy" />
+        </div>
+        <div class="article-card__body">
+          <div class="article-card__category">Garden Journal</div>
+          <h3 class="article-card__title">Garden Tracker for Better Harvests: Digital vs. Paper</h3>
+          <p class="article-card__excerpt">Learn how a garden tracker helps vegetable gardeners increase yields. Compare digital logs vs. paper journals.</p>
+          <span class="article-card__link">Read article <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </div>
+      </a>
+      <a href="/7-garden-planning-tips-for-beginners" class="article-card reveal reveal-d1">
         <div class="article-card__img">
           <img src="https://images.pexels.com/photos/6508835/pexels-photo-6508835.jpeg?auto=compress&cs=tinysrgb&w=600&h=340&fit=crop" alt="Gardener carefully planting seeds in a tray" loading="lazy" />
         </div>
@@ -336,17 +359,6 @@
           <div class="article-card__category">Beginner Gardening</div>
           <h3 class="article-card__title">7 Garden Planning Tips for Beginners</h3>
           <p class="article-card__excerpt">Starting a garden is rewarding but overwhelming. These seven practical tips will help you plan with confidence from day one.</p>
-          <span class="article-card__link">Read article <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-        </div>
-      </a>
-      <a href="/garden-tracker-for-better-harvests" class="article-card reveal reveal-d1">
-        <div class="article-card__img">
-          <img src="https://klpmfclyheooiyffaize.supabase.co/storage/v1/object/public/generated-images/3f7f26b3-4260-44db-b2ff-ed3cb1b62c4f/pin-1775501463259-i5yicb.png" alt="Garden Tracker for Better Harvests" loading="lazy" />
-        </div>
-        <div class="article-card__body">
-          <div class="article-card__category">Garden Journal Ideas</div>
-          <h3 class="article-card__title">Garden Tracker for Better Harvests: Digital vs. Paper</h3>
-          <p class="article-card__excerpt">Learn how a garden tracker helps vegetable gardeners increase yields. Compare digital logs vs. paper journals.</p>
           <span class="article-card__link">Read article <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
         </div>
       </a>
@@ -372,7 +384,9 @@
     <div class="footer__inner">
       <p>&copy; 2026 Garden Planner. Made with 🌱 for gardeners everywhere.</p>
       <span class="footer__sep">&middot;</span>
-      <a href="/imprint">Imprint &amp; Photo Credits</a>
+      <a href="/tips">All Tips</a>
+      <span class="footer__sep">&middot;</span>
+      <a href="/imprint">Imprint</a>
       <span class="footer__sep">&middot;</span>
       <a href="/privacy">Privacy</a>
       <span class="footer__sep">&middot;</span>

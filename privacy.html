@@ -10,22 +10,20 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --c-cream:#F7F3ED;--c-sand:#E8E0D4;--c-bark:#3B2F2A;--c-bark-70:rgba(59,47,42,.7);
-      --c-leaf:#4A7C59;--c-leaf-dk:#3A6347;--c-white:#FFFFFF;
+      --c-cream:#F7F3ED;--c-bark:#3B2F2A;--c-bark-70:rgba(59,47,42,.7);
+      --c-leaf:#4A7C59;--c-leaf-dk:#3A6347;
       --ff-display:'DM Serif Display',Georgia,serif;--ff-body:'Outfit',system-ui,sans-serif;
-      --max-w:800px;--radius:14px;
+      --max-w:800px;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
     body{font-family:var(--ff-body);font-weight:400;color:var(--c-bark);background:var(--c-cream);line-height:1.65;-webkit-font-smoothing:antialiased}
-    a{color:var(--c-leaf);text-decoration:none;transition:color .2s}
+    a{color:var(--c-leaf);text-decoration:none}
     a:hover{color:var(--c-leaf-dk);text-decoration:underline}
     .wrap{width:90%;max-width:var(--max-w);margin-inline:auto}
 
     .header{padding:2rem 0;border-bottom:1px solid rgba(59,47,42,.08)}
     .header__inner{display:flex;align-items:center;justify-content:space-between}
     .header__logo{font-family:var(--ff-display);font-size:1.25rem;color:var(--c-leaf);display:flex;align-items:center;gap:.5rem;text-decoration:none}
-    .header__logo:hover{text-decoration:none}
     .header__logo svg{width:24px;height:24px}
     .header__back{font-size:.85rem;font-weight:500;color:var(--c-bark-70)}
     .header__back:hover{color:var(--c-leaf)}
@@ -68,7 +66,7 @@
     <ul>
       <li><strong>Account data:</strong> If you create an account, we store your email address and authentication credentials securely via Supabase.</li>
       <li><strong>Garden data:</strong> Garden layouts, plant selections, and settings you save are stored in your account.</li>
-      <li><strong>Location data:</strong> If you use the weather feature, your approximate location is stored locally in your browser and is never sent to our servers.</li>
+      <li><strong>Location data:</strong> If you use the weather feature, your approximate location is stored locally in your browser and never sent to our servers.</li>
       <li><strong>Analytics:</strong> We may use privacy-friendly analytics. No personal data is shared with third parties for advertising.</li>
     </ul>
 
@@ -81,9 +79,9 @@
     <h2>Third-Party Services</h2>
     <ul>
       <li><strong>Supabase:</strong> Database and authentication</li>
-      <li><strong>Stripe:</strong> Payment processing for Pro subscriptions — we never see or store your credit card details</li>
+      <li><strong>Stripe:</strong> Payment processing — we never see or store your credit card details</li>
       <li><strong>Vercel:</strong> Website hosting</li>
-      <li><strong>Open-Meteo:</strong> Weather data (no personal data sent, only coordinates)</li>
+      <li><strong>Open-Meteo:</strong> Weather data (only coordinates sent, no personal data)</li>
     </ul>
 
     <h2>Your Rights</h2>
@@ -96,7 +94,7 @@
 
 <footer class="footer">
   <div class="wrap">
-    <p>&copy; 2026 Garden Planner. Made with 🌱 for gardeners everywhere. &nbsp;&middot;&nbsp; <a href="/imprint">Imprint &amp; Photo Credits</a></p>
+    <p>&copy; 2026 Garden Planner. Made with 🌱 for gardeners everywhere. &nbsp;&middot;&nbsp; <a href="/tips">All Tips</a> &nbsp;&middot;&nbsp; <a href="/imprint">Imprint</a></p>
   </div>
 </footer>
 
