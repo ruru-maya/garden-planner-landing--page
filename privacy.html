@@ -23,8 +23,8 @@
 
     .header{padding:2rem 0;border-bottom:1px solid rgba(59,47,42,.08)}
     .header__inner{display:flex;align-items:center;justify-content:space-between}
-    .header__logo{font-family:var(--ff-display);font-size:1.25rem;color:var(--c-leaf);display:flex;align-items:center;gap:.5rem;text-decoration:none}
-    .header__logo svg{width:24px;height:24px}
+    .header__logo{font-family:var(--ff-body);font-size:1.125rem;font-weight:800;color:var(--c-bark);letter-spacing:-.025em;display:flex;align-items:center;gap:.5rem;text-decoration:none}
+    .header__logo .logo-icon{color:var(--c-leaf);width:20px;height:20px}@media(min-width:640px){.header__logo{font-size:1.5rem}.header__logo .logo-icon{width:28px;height:28px}}
     .header__back{font-size:.85rem;font-weight:500;color:var(--c-bark-70)}
     .header__back:hover{color:var(--c-leaf)}
 
@@ -47,8 +47,8 @@
 <header class="header">
   <div class="wrap header__inner">
     <a href="/" class="header__logo">
-      <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" stroke="currentColor" stroke-width="1.5"/><path d="M14 6c0 5-4 8-4 12a4 4 0 0 0 8 0c0-4-4-7-4-12Z" fill="currentColor" opacity=".25"/><path d="M14 6c0 5-4 8-4 12a4 4 0 0 0 8 0c0-4-4-7-4-12Z" stroke="currentColor" stroke-width="1.3"/></svg>
-      Garden Planner
+      <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+      CozyGrow
     </a>
     <a href="/" class="header__back">&larr; Back to Home</a>
   </div>
