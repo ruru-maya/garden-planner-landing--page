@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Write Blog Post - CozyGrow Garden</title>
+  <meta name="description" content="CozyGrow Garden blog editor.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #fdf9f3;
+      --color-panel: #fff;
+      --color-primary: #154212;
+      --color-primary-light: #1e5c18;
+      --color-accent: #9f402d;
+      --color-text: #2c2c2a;
+      --color-text-muted: #6b6b66;
+      --color-border: #e8e2d8;
+      --font-heading: 'Newsreader', Georgia, serif;
+      --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    .site-header {
+      border-bottom: 1px solid var(--color-border);
+      background: rgba(253, 249, 243, 0.94);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+    }
+    .site-header-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .site-logo {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--color-primary);
+      letter-spacing: -0.01em;
+    }
+    .site-logo span { color: var(--color-accent); }
+    .site-nav { display: flex; gap: 1.25rem; align-items: center; }
+    .site-nav a {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      font-weight: 600;
+    }
+    .site-nav a:hover { color: var(--color-primary); }
+    .editor-shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+    .editor-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .editor-header h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 500;
+      color: var(--color-primary);
+      line-height: 1.1;
+    }
+    .editor-header p {
+      color: var(--color-text-muted);
+      max-width: 560px;
+      margin-top: 0.5rem;
+    }
+    .editor-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(340px, 0.9fr);
+      gap: 1.25rem;
+      align-items: start;
+    }
+    .panel {
+      background: var(--color-panel);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .field { display: grid; gap: 0.35rem; }
+    .field.full { grid-column: 1 / -1; }
+    label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+    input, textarea {
+      width: 100%;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--color-text);
+      font: inherit;
+      padding: 0.75rem 0.85rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: rgba(21, 66, 18, 0.45);
+      box-shadow: 0 0 0 3px rgba(21, 66, 18, 0.08);
+    }
+    textarea {
+      min-height: 360px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    .button {
+      border: 0;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s, background 0.2s;
+    }
+    .button:hover { transform: translateY(-1px); }
+    .button.primary { background: var(--color-primary); color: #fff; }
+    .button.primary:hover { background: var(--color-primary-light); }
+    .button.secondary { background: #eee6da; color: var(--color-primary); }
+    .button.ghost { background: transparent; color: var(--color-primary); border: 1px solid var(--color-border); }
+    .status {
+      min-height: 1.5rem;
+      margin-top: 0.9rem;
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+    }
+    .status.ok { color: var(--color-primary); font-weight: 700; }
+    .status.error { color: var(--color-accent); font-weight: 700; }
+    .preview-panel {
+      position: sticky;
+      top: 5.5rem;
+      max-height: calc(100vh - 7rem);
+      overflow: auto;
+    }
+    .preview-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 1rem;
+    }
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .article-category { color: var(--color-accent); }
+    .dot { color: var(--color-border); }
+    article h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.7rem, 3vw, 2.25rem);
+      font-weight: 500;
+      line-height: 1.2;
+      color: var(--color-primary);
+      margin-bottom: 1.25rem;
+    }
+    article h2 {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: var(--color-primary);
+      margin: 2rem 0 0.65rem;
+      line-height: 1.3;
+    }
+    article h3 {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      color: var(--color-primary);
+      margin: 1.5rem 0 0.55rem;
+    }
+    article p, article li {
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+    article p { margin-bottom: 1rem; }
+    article ul, article ol { margin: 0 0 1rem 1.35rem; }
+    article strong { color: var(--color-primary); }
+    article a { color: var(--color-primary); font-weight: 700; }
+    .hero-image {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      background: #eee6da;
+    }
+    .cta-card {
+      background: var(--color-primary);
+      color: #fff;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 2rem 0 0;
+      text-align: center;
+    }
+    .cta-card p {
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 1rem;
+    }
+    .cta-button {
+      display: inline-block;
+      background: #fff;
+      color: var(--color-primary);
+      font-weight: 700;
+      border-radius: 8px;
+      padding: 0.7rem 1rem;
+    }
+    @media (max-width: 900px) {
+      .editor-layout { grid-template-columns: 1fr; }
+      .preview-panel {
+        position: static;
+        max-height: none;
+      }
+    }
+    @media (max-width: 640px) {
+      .site-nav a:nth-child(2) { display: none; }
+      .editor-header { display: block; }
+      .form-grid { grid-template-columns: 1fr; }
+      .editor-shell { padding-inline: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="/" class="site-logo">Cozy<span>Grow</span></a>
+      <nav class="site-nav">
+        <a href="/tips">Tips</a>
+        <a href="/write">Write</a>
+        <a href="https://www.mygardenplanner.app">Open Planner</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="editor-shell">
+    <div class="editor-header">
+      <div>
+        <h1>Write a blog post</h1>
+        <p>Create a structured CozyGrow guide and publish it into the blog feed.</p>
+      </div>
+    </div>
+
+    <div class="editor-layout">
+      <section class="panel">
+        <form id="postForm">
+          <div class="form-grid">
+            <div class="field full">
+              <label for="title">Title</label>
+              <input id="title" name="title" autocomplete="off" required>
+            </div>
+            <div class="field">
+              <label for="slug">Slug</label>
+              <input id="slug" name="slug" autocomplete="off" required>
+            </div>
+            <div class="field">
+              <label for="category">Category</label>
+              <input id="category" name="category" value="Garden Planning">
+            </div>
+            <div class="field">
+              <label for="readTime">Read time</label>
+              <input id="readTime" name="readTime" value="3 min read">
+            </div>
+            <div class="field">
+              <label for="datePublished">Publish date</label>
+              <input id="datePublished" name="datePublished" type="date">
+            </div>
+            <div class="field full">
+              <label for="description">Description</label>
+              <input id="description" name="description" required>
+            </div>
+            <div class="field">
+              <label for="keywords">Keywords</label>
+              <input id="keywords" name="keywords">
+            </div>
+            <div class="field">
+              <label for="image">Image URL</label>
+              <input id="image" name="image">
+            </div>
+            <div class="field full">
+              <label for="imageAlt">Image alt text</label>
+              <input id="imageAlt" name="imageAlt">
+            </div>
+            <div class="field full">
+              <label for="bodyMarkdown">Article body</label>
+              <textarea id="bodyMarkdown" name="bodyMarkdown" required></textarea>
+            </div>
+            <div class="field full">
+              <label for="ctaText">CTA text</label>
+              <input id="ctaText" name="ctaText" value="Ready to plan your best garden yet?">
+            </div>
+            <div class="field">
+              <label for="ctaHref">CTA URL</label>
+              <input id="ctaHref" name="ctaHref" value="https://www.mygardenplanner.app">
+            </div>
+            <div class="field">
+              <label for="ctaLabel">CTA label</label>
+              <input id="ctaLabel" name="ctaLabel" value="Start planning your garden ->">
+            </div>
+            <div class="field full">
+              <label for="password">Editor password</label>
+              <input id="password" name="password" type="password" autocomplete="current-password">
+            </div>
+          </div>
+          <div class="actions">
+            <button class="button primary" type="submit">Publish post</button>
+            <button class="button secondary" type="button" id="saveDraft">Save draft</button>
+            <button class="button ghost" type="button" id="loadDraft">Load draft</button>
+            <button class="button ghost" type="button" id="copyJson">Copy JSON</button>
+          </div>
+          <p class="status" id="status" role="status"></p>
+        </form>
+      </section>
+
+      <aside class="panel preview-panel">
+        <p class="preview-label">Preview</p>
+        <div id="preview"></div>
+      </aside>
+    </div>
+  </main>
+
+  <script src="/assets/blog.js"></script>
+  <script>
+    const form = document.getElementById('postForm');
+    const statusEl = document.getElementById('status');
+    const preview = document.getElementById('preview');
+    const title = document.getElementById('title');
+    const slug = document.getElementById('slug');
+    const datePublished = document.getElementById('datePublished');
+    const draftKey = 'cozygrow-post-draft';
+    let slugTouched = false;
+
+    datePublished.value = new Date().toISOString().slice(0, 10);
+
+    function setStatus(message, type) {
+      statusEl.textContent = message;
+      statusEl.className = `status ${type || ''}`.trim();
+    }
+
+    function value(name) {
+      return form.elements[name].value.trim();
+    }
+
+    function collectPost() {
+      return {
+        title: value('title'),
+        slug: value('slug') || window.CozyGrowBlog.slugify(value('title')),
+        description: value('description'),
+        excerpt: value('description'),
+        category: value('category') || 'Gardening Tips',
+        readTime: value('readTime') || '3 min read',
+        datePublished: value('datePublished'),
+        keywords: value('keywords'),
+        image: value('image'),
+        imageAlt: value('imageAlt') || value('title'),
+        bodyMarkdown: value('bodyMarkdown'),
+        cta: {
+          text: value('ctaText'),
+          href: value('ctaHref'),
+          label: value('ctaLabel'),
+        },
+      };
+    }
+
+    function renderPreview() {
+      const post = collectPost();
+      const html = window.CozyGrowBlog.markdownToHtml(post.bodyMarkdown);
+      preview.innerHTML = `
+        <div class="article-meta">
+          <span class="article-category">${window.CozyGrowBlog.escapeHtml(post.category)}</span>
+          <span class="dot">&middot;</span>
+          <span>${window.CozyGrowBlog.escapeHtml(post.readTime)}</span>
+        </div>
+        <article>
+          <h1>${window.CozyGrowBlog.escapeHtml(post.title || 'Untitled post')}</h1>
+          ${post.image ? `<img class="hero-image" src="${window.CozyGrowBlog.escapeHtml(post.image)}" alt="${window.CozyGrowBlog.escapeHtml(post.imageAlt)}">` : ''}
+          ${html || '<p>Start writing to preview the article.</p>'}
+          ${window.CozyGrowBlog.renderCta({ cta: post.cta })}
+        </article>`;
+    }
+
+    title.addEventListener('input', () => {
+      if (!slugTouched) slug.value = window.CozyGrowBlog.slugify(title.value);
+      renderPreview();
+    });
+    slug.addEventListener('input', () => {
+      slugTouched = true;
+      slug.value = window.CozyGrowBlog.slugify(slug.value);
+    });
+    form.addEventListener('input', renderPreview);
+
+    document.getElementById('saveDraft').addEventListener('click', () => {
+      localStorage.setItem(draftKey, JSON.stringify(collectPost()));
+      setStatus('Draft saved.', 'ok');
+    });
+
+    document.getElementById('loadDraft').addEventListener('click', () => {
+      const draft = JSON.parse(localStorage.getItem(draftKey) || '{}');
+      Object.entries(draft).forEach(([key, draftValue]) => {
+        if (key === 'cta') {
+          form.elements.ctaText.value = draftValue.text || '';
+          form.elements.ctaHref.value = draftValue.href || '';
+          form.elements.ctaLabel.value = draftValue.label || '';
+        } else if (form.elements[key]) {
+          form.elements[key].value = draftValue || '';
+        }
+      });
+      slugTouched = Boolean(form.elements.slug.value);
+      renderPreview();
+      setStatus('Draft loaded.', 'ok');
+    });
+
+    document.getElementById('copyJson').addEventListener('click', async () => {
+      await navigator.clipboard.writeText(JSON.stringify(collectPost(), null, 2));
+      setStatus('Post JSON copied.', 'ok');
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      setStatus('Publishing...', '');
+      try {
+        const response = await fetch('/api/posts', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            password: value('password'),
+            post: collectPost(),
+          }),
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Publish failed.');
+        localStorage.removeItem(draftKey);
+        setStatus(`Published at ${result.url}`, 'ok');
+      } catch (error) {
+        setStatus(error.message, 'error');
+      }
+    });
+
+    renderPreview();
+  </script>
+</body>
+</html>

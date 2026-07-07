@@ -207,6 +207,7 @@
     <div class="topbar__nav">
       <a href="#benefits" class="topbar__nav-link">Features</a>
       <a href="/tips" class="topbar__nav-link">Tips</a>
+      <a href="/write" class="topbar__nav-link">Write</a>
       <div class="topbar__cta">
         <a href="https://www.mygardenplanner.app/" class="btn btn--primary" target="_blank" rel="noopener">Start Planning Free <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 10h10M11 6l4 4-4 4"/></svg></a>
       </div>
@@ -343,29 +344,8 @@
       </div>
       <a href="/tips" class="articles__view-all reveal reveal-d2">View all tips <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
     </div>
-    <div class="articles__grid">
-      <a href="/garden-tracker-for-better-harvests" class="article-card reveal">
-        <div class="article-card__img">
-          <img src="https://klpmfclyheooiyffaize.supabase.co/storage/v1/object/public/generated-images/3f7f26b3-4260-44db-b2ff-ed3cb1b62c4f/pin-1775501463259-i5yicb.png" alt="Garden Tracker for Better Harvests" loading="lazy" />
-        </div>
-        <div class="article-card__body">
-          <div class="article-card__category">Garden Journal</div>
-          <h3 class="article-card__title">Garden Tracker for Better Harvests: Digital vs. Paper</h3>
-          <p class="article-card__excerpt">Learn how a garden tracker helps vegetable gardeners increase yields. Compare digital logs vs. paper journals.</p>
-          <span class="article-card__link">Read article <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-        </div>
-      </a>
-      <a href="/7-garden-planning-tips-for-beginners" class="article-card reveal reveal-d1">
-        <div class="article-card__img">
-          <img src="https://images.pexels.com/photos/6508835/pexels-photo-6508835.jpeg?auto=compress&cs=tinysrgb&w=600&h=340&fit=crop" alt="Gardener carefully planting seeds in a tray" loading="lazy" />
-        </div>
-        <div class="article-card__body">
-          <div class="article-card__category">Beginner Gardening</div>
-          <h3 class="article-card__title">7 Garden Planning Tips for Beginners</h3>
-          <p class="article-card__excerpt">Starting a garden is rewarding but overwhelming. These seven practical tips will help you plan with confidence from day one.</p>
-          <span class="article-card__link">Read article <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-        </div>
-      </a>
+    <div class="articles__grid" id="homeArticlesGrid">
+      <p class="article-card__excerpt">Loading latest guides...</p>
     </div>
   </div>
 </section>
@@ -399,6 +379,17 @@
   </div>
 </footer>
 
+<script src="/assets/blog.js"></script>
+<script>
+  window.CozyGrowBlog.renderGrid('#homeArticlesGrid', {
+    limit: 2,
+    headingLevel: 3,
+    showReadTime: false,
+    excerptLength: 132
+  }).catch(() => {
+    document.getElementById('homeArticlesGrid').innerHTML = '';
+  });
+</script>
 <script>
   const topbar=document.getElementById('topbar');
   window.addEventListener('scroll',()=>{topbar.classList.toggle('scrolled',window.scrollY>20)});

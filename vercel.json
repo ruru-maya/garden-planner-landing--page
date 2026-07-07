@@ -1,6 +1,26 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "rewrites": [
+    { "source": "/blog/:slug", "destination": "/api/post?slug=:slug" },
+    { "source": "/garden-tracker-for-better-harvests", "destination": "/api/post?slug=garden-tracker-for-better-harvests" },
+    { "source": "/7-garden-planning-tips-for-beginners", "destination": "/api/post?slug=7-garden-planning-tips-for-beginners" },
+    { "source": "/your-future-harvest-starts-today", "destination": "/api/post?slug=your-future-harvest-starts-today" },
+    { "source": "/why-your-seedlings-are-getting-leggy", "destination": "/api/post?slug=why-your-seedlings-are-getting-leggy" },
+    { "source": "/why-mulch-makes-gardening-easier", "destination": "/api/post?slug=why-mulch-makes-gardening-easier" },
+    { "source": "/why-i-always-track-planting-dates", "destination": "/api/post?slug=why-i-always-track-planting-dates" },
+    { "source": "/why-i-plan-my-garden-before-planting", "destination": "/api/post?slug=why-i-plan-my-garden-before-planting" },
+    { "source": "/why-deep-watering-improves-root-growth", "destination": "/api/post?slug=why-deep-watering-improves-root-growth" },
+    { "source": "/why-crop-rotation-matters", "destination": "/api/post?slug=why-crop-rotation-matters" },
+    { "source": "/when-to-start-seeds-indoors", "destination": "/api/post?slug=when-to-start-seeds-indoors" },
+    { "source": "/what-successful-gardeners-write-down", "destination": "/api/post?slug=what-successful-gardeners-write-down" },
+    { "source": "/what-i-do-at-the-end-of-every-garden-season", "destination": "/api/post?slug=what-i-do-at-the-end-of-every-garden-season" },
+    { "source": "/turn-your-garden-into-a-paradise", "destination": "/api/post?slug=turn-your-garden-into-a-paradise" },
+    { "source": "/why-shade-makes-outdoor-spaces-usable", "destination": "/api/post?slug=why-shade-makes-outdoor-spaces-usable" },
+    { "source": "/why-i-keep-some-garden-areas-slightly-wild", "destination": "/api/post?slug=why-i-keep-some-garden-areas-slightly-wild" },
+    { "source": "/why-i-add-color-without-flowers", "destination": "/api/post?slug=why-i-add-color-without-flowers" },
+    { "source": "/stop-guessing-in-the-garden", "destination": "/api/post?slug=stop-guessing-in-the-garden" }
+  ],
   "headers": [
     {
       "source": "/(.*)",
