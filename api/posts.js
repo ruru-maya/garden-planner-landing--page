@@ -1,14 +1,18 @@
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 const LOCAL_POSTS_PATH = path.join(process.cwd(), 'assets', 'blog-posts.json');
 const DEFAULT_REPO = 'ruru-maya/garden-planner-landing--page';
 const DEFAULT_BRANCH = 'main';
 const POSTS_FILE = 'assets/blog-posts.json';
+const COOKIE_NAME = 'cozygrow_write_session';
+const SESSION_LABEL = 'cozygrow-write-editor';
 
 function json(res, statusCode, payload) {
   res.statusCode = statusCode;
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  res.setHeader('Cache-Control', 'no-store');
   res.end(JSON.stringify(payload));
 }
 
@@ -19,6 +23,37 @@ function escapeHtml(value) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
+}
+
+function safeEqual(a, b) {
+  const left = Buffer.from(String(a ?? ''));
+  const right = Buffer.from(String(b ?? ''));
+  return left.length === right.length && crypto.timingSafeEqual(left, right);
+}
+
+function sessionValue() {
+  const secret = process.env.EDITOR_SESSION_SECRET || process.env.EDITOR_PASSWORD || '';
+  if (!secret) return '';
+  return crypto.createHmac('sha256', secret).update(SESSION_LABEL).digest('hex');
+}
+
+function parseCookies(req) {
+  return Object.fromEntries(
+    String(req.headers.cookie || '')
+      .split(';')
+      .map((part) => part.trim())
+      .filter(Boolean)
+      .map((part) => {
+        const index = part.indexOf('=');
+        return index === -1 ? [part, ''] : [part.slice(0, index), decodeURIComponent(part.slice(index + 1))];
+      }),
+  );
+}
+
+function hasValidSession(req) {
+  const expected = sessionValue();
+  const actual = parseCookies(req)[COOKIE_NAME];
+  return Boolean(expected && actual && safeEqual(actual, expected));
 }
 
 function slugify(value) {
@@ -239,7 +274,7 @@ module.exports = async function handler(req, res) {
 
   try {
     const payload = await readBody(req);
-    if (payload.password !== expectedPassword) {
+    if (!hasValidSession(req) && !safeEqual(payload.password, expectedPassword)) {
       json(res, 401, { error: 'Invalid editor password.' });
       return;
     }

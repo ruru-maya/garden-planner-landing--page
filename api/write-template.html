@@ -266,6 +266,7 @@
       <nav class="site-nav">
         <a href="/tips">Tips</a>
         <a href="/write">Write</a>
+        <a href="/write?logout=1">Logout</a>
         <a href="https://www.mygardenplanner.app">Open Planner</a>
       </nav>
     </div>
@@ -334,10 +335,6 @@
             <div class="field">
               <label for="ctaLabel">CTA label</label>
               <input id="ctaLabel" name="ctaLabel" value="Start planning your garden ->">
-            </div>
-            <div class="field full">
-              <label for="password">Editor password</label>
-              <input id="password" name="password" type="password" autocomplete="current-password">
             </div>
           </div>
           <div class="actions">
@@ -460,10 +457,7 @@
         const response = await fetch('/api/posts', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            password: value('password'),
-            post: collectPost(),
-          }),
+          body: JSON.stringify({ post: collectPost() }),
         });
         const result = await response.json();
         if (!response.ok) throw new Error(result.error || 'Publish failed.');
