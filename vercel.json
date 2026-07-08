@@ -2,6 +2,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
+    { "source": "/write", "destination": "/api/write" },
     { "source": "/blog/:slug", "destination": "/api/post?slug=:slug" },
     { "source": "/garden-tracker-for-better-harvests", "destination": "/api/post?slug=garden-tracker-for-better-harvests" },
     { "source": "/7-garden-planning-tips-for-beginners", "destination": "/api/post?slug=7-garden-planning-tips-for-beginners" },
@@ -22,6 +23,24 @@
     { "source": "/stop-guessing-in-the-garden", "destination": "/api/post?slug=stop-guessing-in-the-garden" }
   ],
   "headers": [
+    {
+      "source": "/write",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
+    },
+    {
+      "source": "/api/write",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
+    },
+    {
+      "source": "/api/posts",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
+    },
     {
       "source": "/(.*)",
       "headers": [

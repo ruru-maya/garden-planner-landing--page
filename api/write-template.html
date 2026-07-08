@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Write Blog Post - CozyGrow Garden</title>
   <meta name="description" content="CozyGrow Garden blog editor.">
+  <meta name="p:domain_verify" content="3f69746d3ba0e0f8ea4b504560e9745b">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -266,6 +267,7 @@
       <nav class="site-nav">
         <a href="/tips">Tips</a>
         <a href="/write">Write</a>
+        <a href="/write?logout=1">Logout</a>
         <a href="https://www.mygardenplanner.app">Open Planner</a>
       </nav>
     </div>
@@ -334,10 +336,6 @@
             <div class="field">
               <label for="ctaLabel">CTA label</label>
               <input id="ctaLabel" name="ctaLabel" value="Start planning your garden ->">
-            </div>
-            <div class="field full">
-              <label for="password">Editor password</label>
-              <input id="password" name="password" type="password" autocomplete="current-password">
             </div>
           </div>
           <div class="actions">
@@ -460,10 +458,7 @@
         const response = await fetch('/api/posts', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            password: value('password'),
-            post: collectPost(),
-          }),
+          body: JSON.stringify({ post: collectPost() }),
         });
         const result = await response.json();
         if (!response.ok) throw new Error(result.error || 'Publish failed.');

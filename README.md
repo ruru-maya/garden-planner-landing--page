@@ -5,10 +5,11 @@ LAnding page for the garden planner app
 
 Articles now live in `assets/blog-posts.json` and render through the shared blog route at `/blog/:slug`. The old article URLs are preserved in `vercel.json` as rewrites to the same renderer.
 
-Use `/write` to draft and publish a new blog post. Publishing requires these Vercel environment variables:
+Use `/write` to log in, draft, and publish a new blog post. The editor route and publishing API require these Vercel environment variables:
 
 - `GITHUB_TOKEN`: GitHub token with contents write access to this repo.
 - `EDITOR_PASSWORD`: password required by the `/write` editor.
+- `EDITOR_SESSION_SECRET`: optional separate secret for signing the editor session cookie. Defaults to `EDITOR_PASSWORD`.
 
 Optional overrides:
 
