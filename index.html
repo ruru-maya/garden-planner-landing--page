@@ -157,6 +157,7 @@
     .article-card__link{font-size:.82rem;font-weight:600;color:var(--c-leaf);display:inline-flex;align-items:center;gap:.3rem;transition:gap .3s var(--ease-out)}
     .article-card:hover .article-card__link{gap:.6rem}
     .article-card__link svg{width:14px;height:14px}
+    .empty-state{grid-column:1/-1;text-align:center;color:var(--c-bark-70);font-size:.95rem;padding:2rem}
 
     .final-cta{padding:clamp(4rem,10vw,6rem) 0;text-align:center;overflow:hidden}
     .final-cta__card{background:linear-gradient(135deg,var(--c-leaf) 0%,var(--c-leaf-dk) 100%);border-radius:24px;padding:clamp(3rem,6vw,5rem) clamp(2rem,5vw,4rem);color:var(--c-white);position:relative;overflow:hidden}
@@ -343,29 +344,8 @@
       </div>
       <a href="/tips" class="articles__view-all reveal reveal-d2">View all tips <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
     </div>
-    <div class="articles__grid">
-      <a href="/garden-tracker-for-better-harvests" class="article-card reveal">
-        <div class="article-card__img">
-          <img src="https://klpmfclyheooiyffaize.supabase.co/storage/v1/object/public/generated-images/3f7f26b3-4260-44db-b2ff-ed3cb1b62c4f/pin-1775501463259-i5yicb.png" alt="Garden Tracker for Better Harvests" loading="lazy" />
-        </div>
-        <div class="article-card__body">
-          <div class="article-card__category">Garden Journal</div>
-          <h3 class="article-card__title">Garden Tracker for Better Harvests: Digital vs. Paper</h3>
-          <p class="article-card__excerpt">Learn how a garden tracker helps vegetable gardeners increase yields. Compare digital logs vs. paper journals.</p>
-          <span class="article-card__link">Read article <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-        </div>
-      </a>
-      <a href="/7-garden-planning-tips-for-beginners" class="article-card reveal reveal-d1">
-        <div class="article-card__img">
-          <img src="https://images.pexels.com/photos/6508835/pexels-photo-6508835.jpeg?auto=compress&cs=tinysrgb&w=600&h=340&fit=crop" alt="Gardener carefully planting seeds in a tray" loading="lazy" />
-        </div>
-        <div class="article-card__body">
-          <div class="article-card__category">Beginner Gardening</div>
-          <h3 class="article-card__title">7 Garden Planning Tips for Beginners</h3>
-          <p class="article-card__excerpt">Starting a garden is rewarding but overwhelming. These seven practical tips will help you plan with confidence from day one.</p>
-          <span class="article-card__link">Read article <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-        </div>
-      </a>
+    <div class="articles__grid" data-blog-grid="home" data-blog-limit="2">
+      <p class="empty-state">Loading articles...</p>
     </div>
   </div>
 </section>
@@ -406,5 +386,6 @@
   const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:.15});
   reveals.forEach(el=>observer.observe(el));
 </script>
+<script src="/blog.js"></script>
 </body>
 </html>

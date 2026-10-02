@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Write Blog Post - CozyGrow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--cream:#f7f3ed;--sand:#e8e0d4;--bark:#3b2f2a;--muted:rgba(59,47,42,.68);--leaf:#4a7c59;--leaf-dk:#3a6347;--terra:#c2714f;--white:#fff;--border:rgba(59,47,42,.12);--display:'DM Serif Display',Georgia,serif;--body:'Outfit',system-ui,sans-serif}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:var(--body);background:var(--cream);color:var(--bark);line-height:1.55}
+    a{color:inherit;text-decoration:none}.topbar{height:64px;border-bottom:1px solid var(--border);background:rgba(247,243,237,.94);display:flex;align-items:center;position:sticky;top:0;z-index:20}
+    .topbar__inner{width:min(94%,1280px);margin:auto;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+    .logo{font-weight:800;font-size:1.25rem}.logo span{color:var(--leaf)}
+    .topbar nav{display:flex;align-items:center;gap:1rem}.topbar nav a{font-size:.9rem;color:var(--muted);font-weight:600}.topbar nav a:hover{color:var(--bark)}
+    .writer{width:min(94%,1280px);margin:0 auto;padding:1.5rem 0 2.5rem;display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.78fr);gap:1.25rem;align-items:start}
+    .panel{background:var(--white);border:1px solid var(--border);border-radius:8px;overflow:hidden}.panel__head{padding:1rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem}.panel__head h1,.panel__head h2{font-family:var(--display);font-weight:400;font-size:1.45rem;line-height:1.1}.panel__body{padding:1.1rem}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem}.field{display:flex;flex-direction:column;gap:.35rem}.field--full{grid-column:1/-1}label{font-size:.76rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--terra)}
+    input,textarea,select{width:100%;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--bark);font:inherit;padding:.72rem .78rem;outline:none}textarea{min-height:86px;resize:vertical}input:focus,textarea:focus,select:focus,.editor:focus{border-color:var(--leaf);box-shadow:0 0 0 3px rgba(74,124,89,.12)}
+    .toolbar{display:flex;align-items:center;gap:.35rem;flex-wrap:wrap;border:1px solid var(--border);border-bottom:0;border-radius:6px 6px 0 0;background:#fbfaf7;padding:.4rem}.tool{width:34px;height:34px;border:1px solid transparent;border-radius:6px;background:transparent;color:var(--bark);font-weight:700;cursor:pointer}.tool:hover{background:var(--sand)}.tool--wide{width:auto;padding:0 .7rem}
+    .editor{min-height:420px;border:1px solid var(--border);border-radius:0 0 6px 6px;background:#fff;padding:1rem;outline:none;overflow:auto}.editor:empty::before{content:attr(data-placeholder);color:rgba(59,47,42,.42)}.editor h2{font-family:var(--display);font-weight:400;color:var(--leaf-dk);margin:1.6rem 0 .4rem}.editor p{margin:0 0 1rem}.editor ul,.editor ol{margin:0 0 1rem 1.4rem}.editor li{margin:.25rem 0}
+    .actions{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-top:1rem}.btn{border:0;border-radius:999px;background:var(--leaf);color:#fff;font-weight:700;font-size:.92rem;padding:.76rem 1.25rem;cursor:pointer}.btn:hover{background:var(--leaf-dk)}.btn--ghost{background:transparent;color:var(--leaf);border:2px solid var(--leaf)}.btn--ghost:hover{background:var(--leaf);color:#fff}.btn:disabled{opacity:.55;cursor:not-allowed}
+    .status{font-size:.88rem;color:var(--muted);min-height:1.4rem}.status a{color:var(--leaf);font-weight:700;text-decoration:underline}.token-row{display:grid;grid-template-columns:1fr 150px;gap:.75rem;margin-bottom:.85rem}
+    .preview{font-family:'Plus Jakarta Sans',var(--body);background:#fdf9f3;border-radius:8px;border:1px solid #e8e2d8;padding:1.2rem;max-height:calc(100vh - 120px);overflow:auto}.preview__meta{font-size:.75rem;text-transform:uppercase;letter-spacing:.04em;color:#6b6b66;font-weight:700;margin-bottom:1rem}.preview h1{font-family:Georgia,serif;font-size:2rem;line-height:1.18;color:#154212;margin-bottom:1rem}.preview img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:10px;margin-bottom:1.2rem;background:var(--sand)}.preview h2{font-family:Georgia,serif;color:#154212;font-size:1.35rem;margin:1.8rem 0 .5rem}.preview p{margin-bottom:1rem}.preview ul,.preview ol{margin:0 0 1rem 1.4rem}.preview .cta-card{background:#154212;color:#fff;border-radius:10px;padding:1.4rem;text-align:center;margin-top:1.8rem}.preview .cta-card a{display:inline-block;background:#fff;color:#154212;border-radius:8px;padding:.65rem 1.2rem;font-weight:700;margin-top:.5rem}
+    @media(max-width:960px){.writer{grid-template-columns:1fr}.preview{max-height:none}.token-row{grid-template-columns:1fr}.topbar{height:auto}.topbar__inner{padding:.8rem 0;align-items:flex-start;flex-direction:column}.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a href="/" class="logo">Cozy<span>Grow</span></a>
+      <nav>
+        <a href="/tips">Tips</a>
+        <a href="https://github.com/ruru-maya/garden-planner-landing--page" target="_blank" rel="noopener">Repository</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="writer">
+    <section class="panel">
+      <div class="panel__head">
+        <h1>Write Post</h1>
+        <span class="status" id="status"></span>
+      </div>
+      <div class="panel__body">
+        <div class="token-row">
+          <div class="field">
+            <label for="token">GitHub token</label>
+            <input id="token" type="password" autocomplete="off" placeholder="Fine-grained token with contents read/write">
+          </div>
+          <div class="field">
+            <label for="branch">Branch</label>
+            <input id="branch" value="main">
+          </div>
+        </div>
+
+        <form id="postForm">
+          <div class="grid">
+            <div class="field field--full">
+              <label for="title">Title</label>
+              <input id="title" required>
+            </div>
+            <div class="field">
+              <label for="slug">Slug</label>
+              <input id="slug" required>
+            </div>
+            <div class="field">
+              <label for="datePublished">Publish date</label>
+              <input id="datePublished" type="date" required>
+            </div>
+            <div class="field">
+              <label for="category">Category</label>
+              <input id="category" value="Garden Planning">
+            </div>
+            <div class="field">
+              <label for="readTime">Read time</label>
+              <input id="readTime" value="3 min read">
+            </div>
+            <div class="field field--full">
+              <label for="description">Description</label>
+              <textarea id="description" required></textarea>
+            </div>
+            <div class="field field--full">
+              <label for="excerpt">Card excerpt</label>
+              <textarea id="excerpt"></textarea>
+            </div>
+            <div class="field field--full">
+              <label for="image">Hero image URL</label>
+              <input id="image" required>
+            </div>
+            <div class="field">
+              <label for="imageAlt">Image alt text</label>
+              <input id="imageAlt">
+            </div>
+            <div class="field">
+              <label for="keywords">Keywords</label>
+              <input id="keywords">
+            </div>
+            <div class="field field--full">
+              <label>Body</label>
+              <div class="toolbar" aria-label="Editor toolbar">
+                <button class="tool" type="button" data-cmd="bold" title="Bold">B</button>
+                <button class="tool" type="button" data-cmd="italic" title="Italic"><i>I</i></button>
+                <button class="tool tool--wide" type="button" data-block="h2" title="Heading">H2</button>
+                <button class="tool tool--wide" type="button" data-block="p" title="Paragraph">P</button>
+                <button class="tool" type="button" data-cmd="insertUnorderedList" title="Bulleted list">&bull;</button>
+                <button class="tool" type="button" data-cmd="insertOrderedList" title="Numbered list">1.</button>
+                <button class="tool" type="button" data-link title="Link">&#8734;</button>
+                <button class="tool tool--wide" type="button" data-cta title="CTA">CTA</button>
+              </div>
+              <div id="editor" class="editor" contenteditable="true" data-placeholder="Start writing..."></div>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="btn" id="publishBtn" type="submit">Publish post</button>
+            <button class="btn btn--ghost" id="downloadBtn" type="button">Download JSON</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <aside class="panel">
+      <div class="panel__head"><h2>Preview</h2></div>
+      <div class="panel__body">
+        <article class="preview" id="preview"></article>
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    const REPO = "ruru-maya/garden-planner-landing--page";
+    const POSTS_PATH = "blog-posts.json";
+    const API_URL = `https://api.github.com/repos/${REPO}/contents/${POSTS_PATH}`;
+    const fields = ["title","slug","datePublished","category","readTime","description","excerpt","image","imageAlt","keywords"];
+    const form = document.getElementById("postForm");
+    const editor = document.getElementById("editor");
+    const preview = document.getElementById("preview");
+    const statusNode = document.getElementById("status");
+    let slugTouched = false;
+
+    function setStatus(message, type) {
+      statusNode.innerHTML = message || "";
+      statusNode.style.color = type === "error" ? "#9f402d" : "";
+    }
+
+    function slugify(value) {
+      return value.toLowerCase().trim()
+        .replace(/&/g, " and ")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "")
+        .slice(0, 90);
+    }
+
+    function today() {
+      return new Date().toISOString().slice(0, 10);
+    }
+
+    function esc(value) {
+      return String(value || "").replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
+      }[char]));
+    }
+
+    function collectPost() {
+      const post = {};
+      fields.forEach((id) => post[id] = document.getElementById(id).value.trim());
+      post.excerpt = post.excerpt || post.description;
+      post.cardCategory = post.category;
+      post.cardReadTime = post.readTime;
+      post.cardImage = post.image;
+      post.cardImageAlt = post.imageAlt || post.title;
+      post.imageAlt = post.imageAlt || post.title;
+      post.listed = true;
+      post.bodyHtml = editor.innerHTML.trim();
+      return post;
+    }
+
+    function renderPreview() {
+      const post = collectPost();
+      preview.innerHTML = `
+        <div class="preview__meta">${esc(post.category || "Gardening Tips")} &middot; ${esc(post.readTime || "")}</div>
+        <h1>${esc(post.title || "Untitled post")}</h1>
+        ${post.image ? `<img src="${esc(post.image)}" alt="${esc(post.imageAlt || post.title)}">` : ""}
+        <div>${post.bodyHtml || "<p></p>"}</div>
+      `;
+    }
+
+    function encodeBase64(value) {
+      const bytes = new TextEncoder().encode(value);
+      let binary = "";
+      bytes.forEach((byte) => binary += String.fromCharCode(byte));
+      return btoa(binary);
+    }
+
+    function decodeBase64(value) {
+      const binary = atob(value.replace(/\s/g, ""));
+      const bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0));
+      return new TextDecoder().decode(bytes);
+    }
+
+    async function publishPost(post) {
+      const token = document.getElementById("token").value.trim();
+      const branch = document.getElementById("branch").value.trim() || "main";
+      if (!token) throw new Error("Add a GitHub token before publishing.");
+      if (!post.bodyHtml) throw new Error("Write the post body before publishing.");
+
+      const headers = {
+        "Accept": "application/vnd.github+json",
+        "Authorization": `Bearer ${token}`,
+        "X-GitHub-Api-Version": "2022-11-28"
+      };
+      const current = await fetch(`${API_URL}?ref=${encodeURIComponent(branch)}`, { headers });
+      if (!current.ok) throw new Error("Could not load blog-posts.json from GitHub.");
+      const file = await current.json();
+      const posts = JSON.parse(decodeBase64(file.content));
+      const exists = posts.some((item) => item.slug === post.slug);
+      if (exists && !window.confirm("A post with this slug already exists. Replace it?")) return null;
+      const nextPosts = [post, ...posts.filter((item) => item.slug !== post.slug)];
+      const content = JSON.stringify(nextPosts, null, 2) + "\n";
+      const saved = await fetch(API_URL, {
+        method: "PUT",
+        headers,
+        body: JSON.stringify({
+          message: `${exists ? "Update" : "Add"} blog post: ${post.title}`,
+          content: encodeBase64(content),
+          sha: file.sha,
+          branch
+        })
+      });
+      if (!saved.ok) {
+        const detail = await saved.json().catch(() => ({}));
+        throw new Error(detail.message || "GitHub rejected the publish request.");
+      }
+      return `/blog/${post.slug}`;
+    }
+
+    document.getElementById("title").addEventListener("input", (event) => {
+      if (!slugTouched) document.getElementById("slug").value = slugify(event.target.value);
+    });
+    document.getElementById("slug").addEventListener("input", () => slugTouched = true);
+    document.querySelectorAll("input, textarea").forEach((node) => node.addEventListener("input", renderPreview));
+    editor.addEventListener("input", renderPreview);
+
+    document.querySelectorAll("[data-cmd]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.execCommand(button.dataset.cmd, false, null);
+        editor.focus();
+        renderPreview();
+      });
+    });
+    document.querySelectorAll("[data-block]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.execCommand("formatBlock", false, button.dataset.block);
+        editor.focus();
+        renderPreview();
+      });
+    });
+    document.querySelector("[data-link]").addEventListener("click", () => {
+      const url = window.prompt("Link URL");
+      if (url) document.execCommand("createLink", false, url);
+      editor.focus();
+      renderPreview();
+    });
+    document.querySelector("[data-cta]").addEventListener("click", () => {
+      editor.insertAdjacentHTML("beforeend", '<div class="cta-card"><p>Ready to plan your garden?</p><a href="https://www.mygardenplanner.app/" class="cta-button">Start planning your garden &rarr;</a></div>');
+      editor.focus();
+      renderPreview();
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const button = document.getElementById("publishBtn");
+      const post = collectPost();
+      if (!post.slug) post.slug = slugify(post.title);
+      button.disabled = true;
+      setStatus("Publishing...");
+      try {
+        const url = await publishPost(post);
+        if (url) setStatus(`Published. <a href="${url}" target="_blank" rel="noopener">Open post</a>`);
+      } catch (error) {
+        setStatus(error.message, "error");
+      } finally {
+        button.disabled = false;
+      }
+    });
+
+    document.getElementById("downloadBtn").addEventListener("click", () => {
+      const post = collectPost();
+      const blob = new Blob([JSON.stringify(post, null, 2) + "\n"], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `${post.slug || "blog-post"}.json`;
+      link.click();
+      URL.revokeObjectURL(url);
+    });
+
+    document.getElementById("datePublished").value = today();
+    editor.innerHTML = '<p></p>';
+    renderPreview();
+  </script>
+</body>
+</html>
