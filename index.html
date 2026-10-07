@@ -188,6 +188,38 @@
     .footer a:hover{text-decoration:underline}
     .footer .footer__sep{color:var(--c-bark-70);font-size:.8rem}
 
+    .magazine-popup{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;padding:1rem;background:rgba(22,31,24,.58);backdrop-filter:blur(6px)}
+    .magazine-popup.is-visible{display:flex}
+    .magazine-popup__dialog{position:relative;width:min(940px,100%);max-height:min(92vh,760px);display:grid;grid-template-columns:minmax(280px,.9fr) minmax(320px,1fr);overflow:hidden;border-radius:22px;background:var(--c-cream);box-shadow:0 30px 90px rgba(22,31,24,.38);border:1px solid rgba(255,255,255,.5)}
+    .magazine-popup__media{min-height:100%;background:var(--c-bark)}
+    .magazine-popup__media img{width:100%;height:100%;min-height:560px;object-fit:cover}
+    .magazine-popup__content{position:relative;padding:clamp(1.6rem,4vw,3rem);overflow-y:auto}
+    .magazine-popup__close{position:absolute;top:1rem;right:1rem;width:38px;height:38px;border:0;border-radius:50%;background:rgba(59,47,42,.08);color:var(--c-bark);font-size:1.35rem;line-height:1;cursor:pointer;transition:background .2s,transform .2s}
+    .magazine-popup__close:hover{background:rgba(59,47,42,.14);transform:rotate(4deg)}
+    .magazine-popup__eyebrow{font-size:.74rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--c-terracotta);margin-bottom:.65rem}
+    .magazine-popup h2{font-family:var(--ff-display);font-weight:400;font-size:clamp(2rem,4vw,3rem);line-height:1.05;margin-bottom:1rem;color:var(--c-bark)}
+    .magazine-popup__lead{font-size:1rem;color:var(--c-bark-70);line-height:1.7;margin-bottom:1.3rem}
+    .magazine-popup__list{display:grid;gap:.55rem;margin:0 0 1.5rem;list-style:none;color:var(--c-bark);font-size:.94rem}
+    .magazine-popup__list li{position:relative;padding-left:1.9rem}
+    .magazine-popup__list li::before{content:'';position:absolute;left:0;top:.08rem;width:1.35rem;height:1.35rem;border-radius:50%;background:rgba(74,124,89,.13)}
+    .magazine-popup__list li::after{content:'';position:absolute;left:.48rem;top:.38rem;width:.32rem;height:.62rem;border:solid var(--c-leaf);border-width:0 2px 2px 0;transform:rotate(45deg)}
+    .magazine-popup__form{display:grid;gap:.85rem}
+    .magazine-popup__field{display:grid;gap:.35rem}
+    .magazine-popup__field label{font-size:.82rem;font-weight:700;color:var(--c-bark)}
+    .magazine-popup__field input[type="email"]{width:100%;border:1px solid rgba(59,47,42,.16);border-radius:12px;background:var(--c-white);font:inherit;font-size:1rem;color:var(--c-bark);padding:.9rem 1rem;outline:none;transition:border-color .2s,box-shadow .2s}
+    .magazine-popup__field input[type="email"]:focus{border-color:var(--c-leaf);box-shadow:0 0 0 4px rgba(74,124,89,.14)}
+    .magazine-popup__honeypot{position:absolute;left:-10000px;width:1px;height:1px;opacity:0;pointer-events:none}
+    .magazine-popup__consent{display:flex;align-items:flex-start;gap:.6rem;font-size:.78rem;line-height:1.5;color:var(--c-bark-70)}
+    .magazine-popup__consent input{margin-top:.22rem;accent-color:var(--c-leaf);flex:0 0 auto}
+    .magazine-popup__consent a{color:var(--c-leaf);font-weight:700;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+    .magazine-popup__submit{justify-content:center;width:100%;border-radius:12px}
+    .magazine-popup__status{min-height:1.5rem;font-size:.84rem;font-weight:600;color:var(--c-bark-70)}
+    .magazine-popup__status.is-error{color:#9f3a28}
+    .magazine-popup__download{display:none;align-items:center;justify-content:center;width:100%;margin-top:.2rem;border-radius:12px;background:var(--c-terracotta);color:var(--c-white);font-weight:700;padding:.9rem 1rem;transition:transform .2s,box-shadow .2s}
+    .magazine-popup__download.is-visible{display:inline-flex}
+    .magazine-popup__download:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(194,113,79,.25)}
+    .magazine-popup__fine{font-size:.76rem;color:rgba(59,47,42,.56);line-height:1.5;margin-top:.6rem}
+
     .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
     .reveal.visible{opacity:1;transform:translateY(0)}
     .reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.2s}.reveal-d3{transition-delay:.3s}
@@ -205,10 +237,16 @@
       .showcase__grid{grid-template-columns:1fr}.showcase__photo{order:-1}
       .topbar__nav-link{display:none}
       .articles__header{flex-direction:column;align-items:flex-start}
+      .magazine-popup{padding:.75rem;align-items:flex-end}
+      .magazine-popup__dialog{grid-template-columns:1fr;max-height:94vh;border-radius:18px}
+      .magazine-popup__media img{height:220px;min-height:220px;object-position:center 58%}
+      .magazine-popup__content{padding:1.4rem}
     }
     @media(max-width:500px){
       .topbar__inner{height:56px}
       .photo-strip__label{font-size:.6rem}
+      .magazine-popup h2{font-size:2rem}
+      .magazine-popup__media img{height:190px;min-height:190px}
     }
   </style>
 </head>
@@ -395,6 +433,43 @@
   </div>
 </footer>
 
+<div class="magazine-popup" id="autumnMagazinePopup" role="dialog" aria-modal="true" aria-labelledby="autumnMagazineTitle" aria-describedby="autumnMagazineDesc" hidden>
+  <div class="magazine-popup__dialog">
+    <div class="magazine-popup__media" aria-hidden="true">
+      <img src="/assets/cozygrow-autumn-magazine-popup.jpg" alt="" loading="lazy">
+    </div>
+    <div class="magazine-popup__content">
+      <button class="magazine-popup__close" type="button" data-magazine-close aria-label="Close autumn magazine popup">&times;</button>
+      <p class="magazine-popup__eyebrow">Seasonal garden gift</p>
+      <h2 id="autumnMagazineTitle">Your autumn garden, a little easier.</h2>
+      <p class="magazine-popup__lead" id="autumnMagazineDesc">Get the 7-page CozyGrow autumn magazine with practical September-November garden notes, cozy recipes, homemade ajvar, and a fillable weekly planner.</p>
+      <ul class="magazine-popup__list">
+        <li>Seasonal harvest, planting, and protection prompts</li>
+        <li>Cozy kitchen notes for autumn garden produce</li>
+        <li>A printable or fillable weekly garden planner</li>
+      </ul>
+      <form class="magazine-popup__form" id="autumnMagazineForm" novalidate>
+        <div class="magazine-popup__field">
+          <label for="autumnMagazineEmail">Email address</label>
+          <input id="autumnMagazineEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+        </div>
+        <div class="magazine-popup__honeypot" aria-hidden="true">
+          <label for="autumnMagazineWebsite">Website</label>
+          <input id="autumnMagazineWebsite" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <label class="magazine-popup__consent" for="autumnMagazineConsent">
+          <input id="autumnMagazineConsent" name="consent" type="checkbox" required>
+          <span>Send me the magazine and seasonal CozyGrow Garden emails. I can unsubscribe anytime. See the <a href="/privacy" target="_blank" rel="noopener">privacy policy</a>.</span>
+        </label>
+        <button class="btn btn--primary magazine-popup__submit" type="submit">Subscribe &amp; unlock the PDF</button>
+        <p class="magazine-popup__status" id="autumnMagazineStatus" role="status" aria-live="polite"></p>
+        <a class="magazine-popup__download" id="autumnMagazineDownload" href="/downloads/cozygrow-garden-autumn-september-november.pdf" download>Download the magazine</a>
+        <p class="magazine-popup__fine">No spam, just seasonal garden notes from CozyGrow.</p>
+      </form>
+    </div>
+  </div>
+</div>
+
 <script src="/assets/blog.js"></script>
 <script>
   window.CozyGrowBlog.renderGrid('#homeArticlesGrid', {
@@ -412,6 +487,130 @@
   const reveals=document.querySelectorAll('.reveal');
   const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:.15});
   reveals.forEach(el=>observer.observe(el));
+</script>
+<script>
+  (() => {
+    const popup = document.getElementById('autumnMagazinePopup');
+    const form = document.getElementById('autumnMagazineForm');
+    if (!popup || !form) return;
+
+    const endpoint = 'https://hxrtggrgnibtqbnruwja.supabase.co/functions/v1/autumn-magazine-subscribe';
+    const downloadFallback = '/downloads/cozygrow-garden-autumn-september-november.pdf';
+    const status = document.getElementById('autumnMagazineStatus');
+    const download = document.getElementById('autumnMagazineDownload');
+    const closeButtons = popup.querySelectorAll('[data-magazine-close]');
+    const emailInput = document.getElementById('autumnMagazineEmail');
+    const consentInput = document.getElementById('autumnMagazineConsent');
+    const websiteInput = document.getElementById('autumnMagazineWebsite');
+    const submit = form.querySelector('button[type="submit"]');
+    const params = new URLSearchParams(window.location.search);
+    const sourceParam = (params.get('utm_source') || '').toLowerCase();
+    const mediumParam = (params.get('utm_medium') || '').toLowerCase();
+    const campaignParam = (params.get('utm_campaign') || '').toLowerCase();
+    const isFacebookTraffic = sourceParam.includes('facebook') || sourceParam.includes('meta') || mediumParam.includes('facebook') || campaignParam.includes('facebook');
+    const source = isFacebookTraffic ? 'autumn_magazine_facebook' : 'autumn_magazine_popup';
+    const locale = ((window.navigator && window.navigator.language) || '').toLowerCase().startsWith('hr') ? 'hr' : 'en';
+
+    const submittedKey = 'cozygrowAutumnMagazineSubscribed';
+    const dismissedKey = 'cozygrowAutumnMagazineDismissedSession';
+    const readStorage = (storageName, key) => {
+      try {
+        return window[storageName]?.getItem(key);
+      } catch (error) {
+        return null;
+      }
+    };
+    const writeStorage = (storageName, key, value) => {
+      try {
+        window[storageName]?.setItem(key, value);
+      } catch (error) {
+        // Storage can be blocked in strict privacy modes; the popup should still work.
+      }
+    };
+    const shouldAutoOpen = !readStorage('localStorage', submittedKey) && !readStorage('sessionStorage', dismissedKey);
+
+    const setStatus = (message, isError = false) => {
+      if (!status) return;
+      status.textContent = message;
+      status.classList.toggle('is-error', isError);
+    };
+
+    const openPopup = () => {
+      popup.hidden = false;
+      popup.classList.add('is-visible');
+      document.body.style.overflow = 'hidden';
+      window.setTimeout(() => emailInput?.focus(), 80);
+    };
+
+    const closePopup = () => {
+      popup.classList.remove('is-visible');
+      popup.hidden = true;
+      document.body.style.overflow = '';
+      writeStorage('sessionStorage', dismissedKey, '1');
+    };
+
+    closeButtons.forEach((button) => button.addEventListener('click', closePopup));
+    popup.addEventListener('click', (event) => {
+      if (event.target === popup) closePopup();
+    });
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && popup.classList.contains('is-visible')) closePopup();
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const email = emailInput?.value.trim() || '';
+      if (!emailInput?.checkValidity()) {
+        emailInput?.focus();
+        setStatus('Please enter a valid email address.', true);
+        return;
+      }
+      if (!consentInput?.checked) {
+        consentInput?.focus();
+        setStatus('Please confirm that we can send you the magazine and garden emails.', true);
+        return;
+      }
+
+      setStatus('Subscribing...');
+      if (submit) submit.disabled = true;
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email,
+            source,
+            locale,
+            consent: true,
+            website: websiteInput?.value || ''
+          })
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || data.error) {
+          throw new Error(data.error || 'Subscription failed');
+        }
+        const downloadUrl = data.downloadUrl || downloadFallback;
+        if (download) {
+          download.href = downloadUrl;
+          download.classList.add('is-visible');
+          download.focus();
+        }
+        writeStorage('localStorage', submittedKey, '1');
+        setStatus('You are subscribed. Your PDF is ready.');
+      } catch (error) {
+        console.error(error);
+        setStatus('Something went wrong. Please try again in a moment.', true);
+      } finally {
+        if (submit) submit.disabled = false;
+      }
+    });
+
+    window.CozyGrowAutumnMagazine = { open: openPopup };
+    if (shouldAutoOpen) {
+      const delay = isFacebookTraffic || window.location.hash === '#magazine' ? 700 : 5200;
+      window.setTimeout(openPopup, delay);
+    }
+  })();
 </script>
 </body>
 </html>

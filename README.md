@@ -16,3 +16,11 @@ Optional overrides:
 - `GITHUB_REPOSITORY`: defaults to `ruru-maya/garden-planner-landing--page`.
 - `GITHUB_BRANCH`: defaults to `main`.
 - `POSTS_FILE_PATH`: defaults to `assets/blog-posts.json`.
+
+## Autumn magazine popup
+
+The homepage includes an autumn magazine email popup for Facebook/Meta traffic and ordinary visitors. It posts to the CozyGrow Garden Lovable/Supabase Edge Function `autumn-magazine-subscribe`, which adds the email to the existing Brevo newsletter list and returns the PDF URL.
+
+- PDF: `downloads/cozygrow-garden-autumn-september-november.pdf`
+- Popup image: `assets/cozygrow-autumn-magazine-popup.jpg`
+- Download URL returned by the endpoint: `https://www.cozygrowgarden.com/downloads/cozygrow-garden-autumn-september-november.pdf`
