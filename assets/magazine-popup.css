@@ -1,0 +1,34 @@
+    .magazine-popup{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;padding:1rem;background:rgba(22,31,24,.58);backdrop-filter:blur(6px)}
+    .magazine-popup.is-visible{display:flex}
+    .magazine-popup__dialog{position:relative;width:min(940px,100%);max-height:min(92vh,760px);display:grid;grid-template-columns:minmax(280px,.9fr) minmax(320px,1fr);overflow:hidden;border-radius:22px;background:var(--c-cream);box-shadow:0 30px 90px rgba(22,31,24,.38);border:1px solid rgba(255,255,255,.5)}
+    .magazine-popup__media{min-height:100%;background:var(--c-bark)}
+    .magazine-popup__media img{width:100%;height:100%;min-height:560px;object-fit:cover}
+    .magazine-popup__content{position:relative;padding:clamp(1.6rem,4vw,3rem);overflow-y:auto}
+    .magazine-popup__close{position:absolute;top:1rem;right:1rem;width:38px;height:38px;border:0;border-radius:50%;background:rgba(59,47,42,.08);color:var(--c-bark);font-size:1.35rem;line-height:1;cursor:pointer;transition:background .2s,transform .2s}
+    .magazine-popup__close:hover{background:rgba(59,47,42,.14);transform:rotate(4deg)}
+    .magazine-popup__eyebrow{font-size:.74rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--c-terracotta);margin-bottom:.65rem}
+    .magazine-popup h2{font-family:var(--ff-display);font-weight:400;font-size:clamp(2rem,4vw,3rem);line-height:1.05;margin-bottom:1rem;color:var(--c-bark)}
+    .magazine-popup__lead{font-size:1rem;color:var(--c-bark-70);line-height:1.7;margin-bottom:1.3rem}
+    .magazine-popup__list{display:grid;gap:.55rem;margin:0 0 1.5rem;list-style:none;color:var(--c-bark);font-size:.94rem}
+    .magazine-popup__list li{position:relative;padding-left:1.9rem}
+    .magazine-popup__list li::before{content:'';position:absolute;left:0;top:.08rem;width:1.35rem;height:1.35rem;border-radius:50%;background:rgba(74,124,89,.13)}
+    .magazine-popup__list li::after{content:'';position:absolute;left:.48rem;top:.38rem;width:.32rem;height:.62rem;border:solid var(--c-leaf);border-width:0 2px 2px 0;transform:rotate(45deg)}
+    .magazine-popup__form{display:grid;gap:.85rem}
+    .magazine-popup__field{display:grid;gap:.35rem}
+    .magazine-popup__field label{font-size:.82rem;font-weight:700;color:var(--c-bark)}
+    .magazine-popup__field input[type="email"]{width:100%;border:1px solid rgba(59,47,42,.16);border-radius:12px;background:var(--c-white);font:inherit;font-size:1rem;color:var(--c-bark);padding:.9rem 1rem;outline:none;transition:border-color .2s,box-shadow .2s}
+    .magazine-popup__field input[type="email"]:focus{border-color:var(--c-leaf);box-shadow:0 0 0 4px rgba(74,124,89,.14)}
+    .magazine-popup__honeypot{position:absolute;left:-10000px;width:1px;height:1px;opacity:0;pointer-events:none}
+    .magazine-popup__consent{display:flex;align-items:flex-start;gap:.6rem;font-size:.78rem;line-height:1.5;color:var(--c-bark-70)}
+    .magazine-popup__consent input{margin-top:.22rem;accent-color:var(--c-leaf);flex:0 0 auto}
+    .magazine-popup__consent a{color:var(--c-leaf);font-weight:700;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+    .magazine-popup__submit{justify-content:center;width:100%;border-radius:12px}
+    .magazine-popup__status{min-height:1.5rem;font-size:.84rem;font-weight:600;color:var(--c-bark-70)}
+    .magazine-popup__status.is-error{color:#9f3a28}
+    .magazine-popup__download{display:none;align-items:center;justify-content:center;width:100%;margin-top:.2rem;border-radius:12px;background:var(--c-terracotta);color:var(--c-white);font-weight:700;padding:.9rem 1rem;transition:transform .2s,box-shadow .2s}
+    .magazine-popup__download.is-visible{display:inline-flex}
+    .magazine-popup__download:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(194,113,79,.25)}
+    .magazine-popup__fine{font-size:.76rem;color:rgba(59,47,42,.56);line-height:1.5;margin-top:.6rem}
+
+
+@media(max-width:760px){.magazine-popup{padding:.65rem;align-items:center}.magazine-popup__dialog{grid-template-columns:1fr;max-height:93dvh;border-radius:14px}.magazine-popup__media{display:none}.magazine-popup__content{padding:1.7rem 1.3rem}.magazine-popup h2{font-size:2rem}.magazine-popup__lead{font-size:.87rem}.magazine-popup__list{font-size:.84rem;gap:.45rem;margin-bottom:1.1rem}.magazine-popup__close{top:.6rem;right:.6rem}.magazine-popup__form{gap:.65rem}}

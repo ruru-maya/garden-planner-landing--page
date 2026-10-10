@@ -1,6 +1,18 @@
 # garden-planner-landing--page
 LAnding page for the garden planner app
 
+## Autumn homepage redesign (10 October 2026)
+
+The homepage uses `assets/home-autumn.css` and `assets/home-autumn.js`. The product screenshot tabs support mouse, touch, Left/Right arrow keys, Home, and End. Mobile visitors receive mobile app captures through responsive `<picture>` sources; desktop visitors receive desktop captures.
+
+All six images in `assets/screenshots/` were captured from the actual live app at `https://www.mygardenplanner.app/try` on 10 October 2026, using a newly created anonymous guest garden with its starter plants and demo patch. No personal account or private garden was used. Screens show the real Today, Patch, and Plants views; they are not generated app mockups. Source features were checked against the local app checkout at `b8925fb7143cd6c7ae20e2f04b7811b51b9307c7` and the live guest experience.
+
+The main call to action opens `/try`; sign-in opens `/auth`. Copy distinguishes the no-signup guest demo (72 hours) from saving a garden with an account and avoids promising unlimited free features. Blog data, article routes, publishing APIs, analytics, and the PDF remain in place.
+
+The magazine form retains the existing confirmed-subscription/PDF-unlock checks. It opens from both magazine buttons, opens after 700ms for Facebook or `#magazine` entry, and after 30 seconds for other eligible visitors. Dismissal suppresses the pending automatic opening for that session. The dialog traps keyboard focus and restores focus when closed. Its styles are in `assets/magazine-popup.css`.
+
+Validation: local HTTP checks for homepage assets, PDF, tips, privacy, and imprint; browser checks for responsive layout, real mobile image selection, screenshot tabs, keyboard navigation, empty-form validation, and Escape/focus restoration. No real newsletter subscription was submitted. Production deployment is separate from this local redesign.
+
 ## Blog publishing
 
 Articles now live in `assets/blog-posts.json` and render through the shared blog route at `/blog/:slug`. The old article URLs are preserved in `vercel.json` as rewrites to the same renderer.
