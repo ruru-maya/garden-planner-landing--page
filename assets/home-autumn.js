@@ -1,6 +1,10 @@
 (() => {
+  const christmasTeaser = document.getElementById('christmas-gift');
+  if (christmasTeaser && Date.now() >= Date.parse(christmasTeaser.dataset.offerEnds)) {
+    christmasTeaser.hidden = true;
+  }
   const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const revealSelector = '.section-heading, .benefit, .product-tabs, .product-panel__image, .product-panel__copy, .plant-guide, .step, .magazine__card, .articles__header, .article-card, .faq > div, .final-cta__inner';
+  const revealSelector = '.christmas-teaser__card, .section-heading, .benefit, .product-tabs, .product-panel__image, .product-panel__copy, .plant-guide, .step, .magazine__card, .articles__header, .article-card, .faq > div, .final-cta__inner';
   const revealObserver = 'IntersectionObserver' in window ? new IntersectionObserver((entries) => {
     entries.forEach(({ target, isIntersecting }) => {
       if (!isIntersecting) return;

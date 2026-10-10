@@ -23,6 +23,14 @@ The magazine form retains the existing confirmed-subscription/PDF-unlock checks.
 
 Validation: local HTTP checks for homepage assets, PDF, tips, privacy, and imprint; browser checks for responsive layout, real mobile image selection, screenshot tabs, keyboard navigation, empty-form validation, and Escape/focus restoration. No real newsletter subscription was submitted. Production deployment is separate from this local redesign.
 
+## Christmas gift teaser (10 October 2026)
+
+The homepage includes a compact Christmas postcard teaser below the hero and demo proof strip. It links to `/christmas?offer=1`, which opens the approved gift offer directly. `christmas.html` and its postcard assets contain the reviewed campaign, including Cozy Garden Advisor. The teaser hides after 6 January 2027, matching the offer deadline.
+
+`GIFT_CHECKOUT_LIVE` stays false until the separate application checkout, terms and payment backend are published and verified. Public gift buttons show "Gift checkout coming soon" and link to an explanation and the free demo; gift details link to the on-page FAQ. Loopback previews retain the draft application checkout at port 8130. The live application's gift purchase route returned its 404 page during the release check on 10 October 2026. Publishing this landing repository does not activate payments.
+
+The postcard preview uses a smaller JPEG exported from the approved Garden + App recipient card. The main offer retains its complete postcard previews and full-size sample images.
+
 ## Blog publishing
 
 Articles now live in `assets/blog-posts.json` and render through the shared blog route at `/blog/:slug`. The old article URLs are preserved in `vercel.json` as rewrites to the same renderer.

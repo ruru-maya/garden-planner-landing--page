@@ -37,6 +37,20 @@
 .product-panel--patch .product-panel__image picture{max-width:340px;border-radius:12px;overflow:hidden;box-shadow:0 8px 25px #303a2015}
 .product-panel--patch .product-panel__image img.patch-image{width:100%;height:auto;aspect-ratio:auto;object-fit:contain}
 @media(max-width:760px){.product-panel--patch{grid-template-columns:1fr}.product-panel--patch .product-panel__image{padding:18px}}
+.christmas-teaser{padding-top:34px;scroll-margin-top:110px}
+.christmas-teaser__card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,310px);align-items:center;gap:44px;background:linear-gradient(115deg,#1f422f,#344332);color:var(--cream);border:1px solid #41583d;border-radius:14px;padding:34px 42px;overflow:hidden}
+.christmas-teaser .eyebrow{color:#edc88f;font-size:10px}
+.christmas-teaser h2{font-family:var(--ff-display);font-size:clamp(29px,3vw,39px);line-height:1.15;letter-spacing:-.02em;margin-top:12px}
+.christmas-teaser__description{max-width:430px;font-size:14px;line-height:1.75;color:#e3e7d8;margin:12px 0 20px}
+.christmas-teaser .btn{font-size:13px}
+.christmas-teaser__fine{font-size:10px;color:#d3d9c8;margin-top:12px}
+.christmas-teaser__visual{min-width:0;text-align:center}
+.christmas-teaser__visual a{display:block;transform:rotate(3deg);border:3px solid #f4efdc;border-radius:9px;overflow:hidden;box-shadow:0 12px 26px #0c211c66;transition:transform .25s}
+.christmas-teaser__visual a:hover{transform:rotate(1deg) translateY(-3px)}
+.christmas-teaser__visual img{width:100%;height:auto}
+.christmas-teaser__visual figcaption{font-size:10px;color:#d3d9c8;margin-top:18px}
+@media(max-width:900px){.christmas-teaser__card{grid-template-columns:minmax(0,1fr) minmax(0,230px);gap:28px;padding:30px}}
+@media(max-width:600px){.christmas-teaser{padding-top:26px}.christmas-teaser__card{grid-template-columns:1fr;gap:25px;padding:27px 24px}.christmas-teaser h2{font-size:32px}.christmas-teaser__description{font-size:13px}.christmas-teaser__visual{width:100%;max-width:310px;justify-self:center}.christmas-teaser .btn{width:100%;padding-inline:12px;font-size:12px}.christmas-teaser__visual figcaption{margin-top:15px}}
 @keyframes cozy-reveal{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 @keyframes cozy-panel-enter{from{opacity:.55;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .is-revealing,.intro-enter{animation:cozy-reveal .65s cubic-bezier(.2,.7,.2,1) var(--reveal-delay,0ms) both}
