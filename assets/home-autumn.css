@@ -37,4 +37,9 @@
 .product-panel--patch .product-panel__image picture{max-width:340px;border-radius:12px;overflow:hidden;box-shadow:0 8px 25px #303a2015}
 .product-panel--patch .product-panel__image img.patch-image{width:100%;height:auto;aspect-ratio:auto;object-fit:contain}
 @media(max-width:760px){.product-panel--patch{grid-template-columns:1fr}.product-panel--patch .product-panel__image{padding:18px}}
+@keyframes cozy-reveal{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes cozy-panel-enter{from{opacity:.55;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.is-revealing,.intro-enter{animation:cozy-reveal .65s cubic-bezier(.2,.7,.2,1) var(--reveal-delay,0ms) both}
+.hero__visual.intro-enter{animation-duration:.85s;animation-delay:.12s}
+.panel-entering{animation:cozy-panel-enter .3s ease-out both}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
