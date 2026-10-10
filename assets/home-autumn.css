@@ -9,6 +9,6 @@
 .product-panel--patch{grid-template-columns:1.1fr 1fr}
 .product-panel--patch .product-panel__image{justify-content:center;padding:26px;background:#e2dfd0}
 .product-panel--patch .product-panel__image picture{max-width:340px;border-radius:12px;overflow:hidden;box-shadow:0 8px 25px #303a2015}
-.product-panel--patch .product-panel__image img.patch-image{aspect-ratio:375/660;object-fit:cover;object-position:50% 66%}
+.product-panel--patch .product-panel__image img.patch-image{width:100%;height:auto;aspect-ratio:auto;object-fit:contain}
 @media(max-width:760px){.product-panel--patch{grid-template-columns:1fr}.product-panel--patch .product-panel__image{padding:18px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
