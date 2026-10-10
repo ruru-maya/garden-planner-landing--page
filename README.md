@@ -27,7 +27,7 @@ Validation: local HTTP checks for homepage assets, PDF, tips, privacy, and impri
 
 The homepage includes a compact Christmas postcard teaser below the hero and demo proof strip. It links to `/christmas?offer=1`, which opens the approved gift offer directly. `christmas.html` and its postcard assets contain the reviewed campaign, including Cozy Garden Advisor. The teaser hides after 6 January 2027, matching the offer deadline.
 
-`GIFT_CHECKOUT_LIVE` stays false until the separate application checkout, terms and payment backend are published and verified. Public gift buttons show "Gift checkout coming soon" and link to an explanation and the free demo; gift details link to the on-page FAQ. Loopback previews retain the draft application checkout at port 8130. The live application's gift purchase route returned its 404 page during the release check on 10 October 2026. Publishing this landing repository does not activate payments.
+`GIFT_CHECKOUT_LIVE` is true, enabled on 11 October 2026 after the owner confirmed that Stripe checkout is wired. Public gift buttons link to `https://www.mygardenplanner.app/gifts/buy?plan=basic` or `?plan=premium`, gift terms link to the app, and the coming-soon notice is hidden. Loopback previews retain the application checkout at port 8130. This flag controls the landing-page links; payment processing remains in the separate app.
 
 The postcard preview uses a smaller JPEG exported from the approved Garden + App recipient card. The main offer retains its complete postcard previews and full-size sample images.
 
