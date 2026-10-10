@@ -24,3 +24,7 @@ The homepage includes an autumn magazine email popup for Facebook/Meta traffic a
 - PDF: `downloads/cozygrow-garden-autumn-september-november.pdf`
 - Popup image: `assets/cozygrow-autumn-magazine-popup.jpg`
 - Download URL returned by the endpoint: `https://www.cozygrowgarden.com/downloads/cozygrow-garden-autumn-september-november.pdf`
+
+The popup only confirms a subscription after a successful HTTP response containing `ok: true` and the expected PDF URL. An empty/honeypot response never unlocks the PDF or marks the browser as subscribed. Failed or timed-out requests preserve the entered email and allow retry; duplicate submits are ignored while a request is pending or after confirmed success.
+
+PDF email delivery belongs to the backend. If it returns `emailDelivery: "failed"` or `"suppressed"`, the popup offers the direct PDF and explains that the email could not be sent. A real contact readback and inbox check are needed to verify the complete service.

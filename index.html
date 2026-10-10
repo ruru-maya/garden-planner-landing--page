@@ -495,7 +495,7 @@
     if (!popup || !form) return;
 
     const endpoint = 'https://hxrtggrgnibtqbnruwja.supabase.co/functions/v1/autumn-magazine-subscribe';
-    const downloadFallback = '/downloads/cozygrow-garden-autumn-september-november.pdf';
+    const expectedDownloadUrl = 'https://www.cozygrowgarden.com/downloads/cozygrow-garden-autumn-september-november.pdf';
     const status = document.getElementById('autumnMagazineStatus');
     const download = document.getElementById('autumnMagazineDownload');
     const closeButtons = popup.querySelectorAll('[data-magazine-close]');
@@ -528,6 +528,8 @@
       }
     };
     const shouldAutoOpen = !readStorage('localStorage', submittedKey) && !readStorage('sessionStorage', dismissedKey);
+    let isSubmitting = false;
+    let isSubscribed = false;
 
     const setStatus = (message, isError = false) => {
       if (!status) return;
@@ -559,6 +561,7 @@
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
+      if (isSubmitting || isSubscribed) return;
       const email = emailInput?.value.trim() || '';
       if (!emailInput?.checkValidity()) {
         emailInput?.focus();
@@ -572,11 +575,15 @@
       }
 
       setStatus('Subscribing...');
+      isSubmitting = true;
       if (submit) submit.disabled = true;
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), 20000);
       try {
         const response = await fetch(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
+          signal: controller.signal,
           body: JSON.stringify({
             email,
             source,
@@ -586,22 +593,27 @@
           })
         });
         const data = await response.json().catch(() => ({}));
-        if (!response.ok || data.error) {
-          throw new Error(data.error || 'Subscription failed');
+        if (!response.ok || data?.ok !== true || data.error || data.downloadUrl !== expectedDownloadUrl) {
+          throw new Error('Subscription not confirmed');
         }
-        const downloadUrl = data.downloadUrl || downloadFallback;
+        isSubscribed = true;
         if (download) {
-          download.href = downloadUrl;
+          download.href = data.downloadUrl;
           download.classList.add('is-visible');
           download.focus();
         }
         writeStorage('localStorage', submittedKey, '1');
-        setStatus('You are subscribed. Your PDF is ready.');
+        const emailUnavailable = data.emailDelivery === 'failed' || data.emailDelivery === 'suppressed';
+        setStatus(emailUnavailable
+          ? 'You are subscribed. Your PDF is ready below. We could not send the email, so please download your copy here.'
+          : 'You are subscribed. Your PDF is ready.');
+        if (submit) submit.textContent = 'Subscribed';
       } catch (error) {
-        console.error(error);
-        setStatus('Something went wrong. Please try again in a moment.', true);
+        setStatus('We could not confirm your subscription. Please try again. Your email is still in the form.', true);
       } finally {
-        if (submit) submit.disabled = false;
+        window.clearTimeout(timeout);
+        isSubmitting = false;
+        if (submit) submit.disabled = isSubscribed;
       }
     });
 
