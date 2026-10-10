@@ -3,9 +3,9 @@ LAnding page for the garden planner app
 
 ## Autumn homepage redesign (10 October 2026)
 
-The homepage uses `assets/home-autumn.css` and `assets/home-autumn.js`. The product screenshot tabs support mouse, touch, Left/Right arrow keys, Home, and End. Mobile visitors receive mobile app captures through responsive `<picture>` sources; desktop visitors receive desktop captures.
+The homepage uses `assets/home-autumn.css` and `assets/home-autumn.js`. The product screenshot tabs support mouse, touch, Left/Right arrow keys, Home, and End. Today and Plants use responsive desktop/mobile captures. Patch uses the closer mobile capture on both screen sizes, so the planted bed is clearly visible.
 
-All six images in `assets/screenshots/` were captured from the actual live app at `https://www.mygardenplanner.app/try` on 10 October 2026, using a newly created anonymous guest garden with its starter plants and demo patch. No personal account or private garden was used. Screens show the real Today, Patch, and Plants views; they are not generated app mockups. Source features were checked against the local app checkout at `b8925fb7143cd6c7ae20e2f04b7811b51b9307c7` and the live guest experience.
+The images in `assets/screenshots/` were captured from the actual live app at `https://www.mygardenplanner.app/try` on 10 October 2026, using a newly created anonymous guest garden with its starter plants and demo patch. No personal account or private garden was used. Screens show the real Today, Patch, and Plants views; they are not generated app mockups. Source features were checked against the local app checkout at `b8925fb7143cd6c7ae20e2f04b7811b51b9307c7` and the live guest experience. `cozygrow-patch-detail.jpg` is a fresh mobile capture at the app's 169% zoom. CSS frames the garden heading, controls, and complete planted bed, excluding the guest banner and surplus margins. The earlier wide patch captures are retained as source assets.
 
 The main call to action opens `/try`; sign-in opens `/auth`. Copy distinguishes the no-signup guest demo (72 hours) from saving a garden with an account and avoids promising unlimited free features. Blog data, article routes, publishing APIs, analytics, and the PDF remain in place.
 
