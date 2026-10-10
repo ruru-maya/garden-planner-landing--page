@@ -6,6 +6,14 @@
 @media(max-width:380px){.brand{font-size:20px;gap:7px}.brand__mark{width:28px;height:28px}.topbar__nav{gap:10px}.nav-signin{display:none}.hero h1{font-size:58px}.hero__actions{gap:18px}.hero__actions .text-link{font-size:11px}.season-bar span{display:none}.article-card{grid-template-columns:1fr}.article-card__img{height:180px;min-height:0}.product-tab{padding:9px 10px}}
 .app-window picture,.product-panel__image picture{display:block;width:100%}
 @media(max-width:760px){.hero h1{font-size:clamp(44px,13.3vw,58px)}.hero__actions{gap:17px}.hero__actions .text-link{font-size:11px}.hero__sub{font-size:14px}.hero__visual{max-width:350px;width:100%;margin-inline:auto;padding-inline:18px}.hero__visual::before{border-radius:47% 47% 12% 12%;inset:0 -3px 0 20px}.hero .app-window{border-radius:20px;border-width:7px;max-width:285px;margin-inline:auto;transform:rotate(-2deg)}.hero .app-window img{aspect-ratio:390/570;object-fit:cover;object-position:top;border-radius:12px}.hero .window-bar{padding:5px 6px 10px;font-size:8px}.hero__caption{text-align:center;max-width:280px;margin-inline:auto;line-height:1.6}.screenshot-tag{font-size:9px;padding:10px 12px;bottom:4px;left:0}.screenshot-tag strong{font-size:10px}.screenshot-tag svg{width:21px;height:21px}.product-panel__image{padding:22px;background:#e2dfd0}.product-panel__image picture{max-width:270px;border-radius:10px;overflow:hidden;box-shadow:0 8px 25px #303a2015}.product-panel__image img,.product-panel__image img.patch-image{aspect-ratio:390/844;object-fit:contain;object-position:top}.eyebrow{font-size:10px}}
+.btn{box-shadow:0 2px 4px #28342514,0 7px 16px #2834251f;transition:background .2s,transform .2s,box-shadow .2s}
+.btn:hover{box-shadow:0 4px 7px #2834251a,0 11px 22px #28342526}
+.btn--primary{box-shadow:0 2px 4px #913b2421,0 7px 16px #ae482a2b}
+.btn--primary:hover{box-shadow:0 4px 7px #913b2429,0 11px 22px #ae482a38}
+.btn:active{transform:translateY(0);box-shadow:0 1px 3px #2834251f}
+.btn:disabled{box-shadow:none}
+.product-tab{box-shadow:0 2px 4px #2834250d}
+.product-tab[aria-selected=true]{box-shadow:0 3px 10px #28342524}
 .hero .screenshot-tag{position:relative;left:auto;bottom:auto;transform:none;width:fit-content;max-width:100%;margin-top:20px}
 .hero .hero__caption{margin-top:12px}
 @media(max-width:760px){.hero .screenshot-tag{margin-inline:auto}}

@@ -7,6 +7,8 @@ The homepage uses `assets/home-autumn.css` and `assets/home-autumn.js`. The prod
 
 The hero's screenshot label occupies its own row above the caption, so neither text block overlaps as the screen width or text wrapping changes.
 
+Homepage and Tips call-to-action buttons use soft layered shadows, stronger hover shadows, and a pressed state. Screenshot tabs also have subtle depth, with a stronger shadow on the active tab.
+
 The Plants panel frames both captures to exclude the 15-pixel browser scrollbar along their right edge. The screenshot content retains its original proportions.
 
 The Plants tab also shows the user-supplied Basil organic growing guide (`cozygrow-organic-guide-supplied.png`). CSS frames the guide itself, excluding the surrounding modal backdrop and captured scrollbar. The copy describes 63 bundled organic guides, verified against `src/lib/starterPlants.ts` and `src/data/plantKnowledgeBase.md` in the app source. AI guide generation requires Premium; Magic Gardener can plan layouts using custom plants and requires an account. These requirements were checked in the app components and `plant-guide` backend source; no paid AI request was made during this landing-page change.
