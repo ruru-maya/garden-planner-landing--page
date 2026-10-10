@@ -9,6 +9,18 @@
 .product-panel--plants .product-panel__image picture{overflow:hidden}
 .product-panel--plants .product-panel__image img{width:101.2%;max-width:none;aspect-ratio:auto}
 @media(max-width:760px){.product-panel--plants .product-panel__image img{width:104.167%}}
+.plant-guide{grid-column:1/-1;display:grid;grid-template-columns:1fr 1.35fr;gap:54px;align-items:center;padding:42px 48px;border-top:1px solid #d9decd;background:#f4efe3}
+.plant-guide__visual{display:grid;justify-items:center;gap:15px;min-width:0}
+.plant-guide__frame{width:100%;max-width:300px;aspect-ratio:311/677;overflow:hidden;border-radius:20px;background:#fcf8f5;box-shadow:0 12px 30px #303a201a}
+.plant-guide__frame img{width:114.791%;max-width:none;height:auto;margin-left:-4.502%;margin-top:-14.791%}
+.plant-guide__visual figcaption{font-size:10px;color:var(--muted);text-align:center}
+.plant-guide__copy .eyebrow{font-size:10px;color:var(--orange)}
+.plant-guide__copy>p{max-width:440px}
+.plant-guide__ai{padding:20px;border:1px solid #d5dcc7;border-radius:10px;background:#e9ecdf;margin:26px 0}
+.plant-guide__ai h4{font-family:var(--ff-display);font-size:23px;font-weight:400;line-height:1.2;margin:8px 0}
+.plant-guide__ai p.plant-guide__note{font-size:10px;line-height:1.6;margin-top:12px}
+@media(max-width:1050px){.plant-guide{padding:32px;gap:32px}}
+@media(max-width:760px){.plant-guide{grid-template-columns:1fr;gap:28px;padding:26px 24px}.plant-guide__frame{max-width:285px}.plant-guide__copy .eyebrow{font-size:9px}.plant-guide__ai{padding:17px}}
 .product-panel--patch{grid-template-columns:1.1fr 1fr}
 .product-panel--patch .product-panel__image{justify-content:center;padding:26px;background:#e2dfd0}
 .product-panel--patch .product-panel__image picture{max-width:340px;border-radius:12px;overflow:hidden;box-shadow:0 8px 25px #303a2015}
