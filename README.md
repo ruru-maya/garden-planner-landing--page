@@ -5,6 +5,8 @@ LAnding page for the garden planner app
 
 The homepage uses `assets/home-autumn.css` and `assets/home-autumn.js`. The product screenshot tabs support mouse, touch, Left/Right arrow keys, Home, and End. Today and Plants use responsive desktop/mobile captures. Patch uses the closer mobile capture on both screen sizes, so the planted bed is clearly visible.
 
+The Plants panel frames both captures to exclude the 15-pixel browser scrollbar along their right edge. The screenshot content retains its original proportions.
+
 Today and Plants images in `assets/screenshots/` were captured from the actual live app at `https://www.mygardenplanner.app/try` on 10 October 2026, using a newly created anonymous guest garden with its starter plants. No personal account or private garden was used for those captures. The Patch panel uses `cozygrow-patch-mobile-supplied.png`, the screenshot supplied and selected by the user on 10 October 2026. It is displayed at its original aspect ratio, without cropping or stretching, on mobile and desktop. Screens show real app views; they are not generated app mockups. Source features were checked against the local app checkout at `b8925fb7143cd6c7ae20e2f04b7811b51b9307c7` and the live guest experience. Earlier patch captures are retained as source assets.
 
 The main call to action opens `/try`; sign-in opens `/auth`. Copy distinguishes the no-signup guest demo (72 hours) from saving a garden with an account and avoids promising unlimited free features. Blog data, article routes, publishing APIs, analytics, and the PDF remain in place.
