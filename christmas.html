@@ -530,7 +530,7 @@
     <div class="soil" data-soil></div>
   </section>
 
-  <div class="marquee" aria-hidden="true"><div class="marquee__track" id="marq"></div></div>
+  <div class="marquee" aria-hidden="true"><div class="marquee__track"></div></div>
 
   <section class="xsec xsec--sand center" id="plans">
     <div class="wrap">
@@ -642,6 +642,8 @@
     </div>
   </section>
 
+  <div class="marquee" aria-hidden="true"><div class="marquee__track"></div></div>
+
   <section class="xsec xsec--pine center" id="magic">
     <div class="wrap">
       <p class="section-label">Premium · Magic Gardener AI</p>
@@ -727,6 +729,8 @@
       <details><summary>Can I give it to myself?</summary><p>Of course. Gift codes work for any account, including your own.</p></details>
     </div>
   </section>
+
+  <div class="marquee" aria-hidden="true"><div class="marquee__track"></div></div>
 
   <section class="final">
     <div class="wrap"><div class="final__card">
@@ -814,10 +818,10 @@
 
   // ---- marquee ----
   (function(){
-    var m=document.getElementById('marq'); if(!m)return;
+    var tracks=document.querySelectorAll('.marquee__track'); if(!tracks.length)return;
     var items=['Gift a year of CozyGrow Garden','Christmas price until 6 January','1 month free for you','Premium with Magic Gardener AI','Nothing to wrap'], h='';
     for(var r=0;r<4;r++)items.forEach(function(t){h+='<span>'+t+'</span>'});
-    m.innerHTML=h;
+    tracks.forEach(function(m){m.innerHTML=h});
   })();
 
   // ---- Magic Gardener example preview (illustrative, rule-based) ----
