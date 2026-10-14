@@ -193,8 +193,8 @@
           <input id="autumnMagazineConsent" name="consent" type="checkbox" required>
           <span>Send me the magazine and seasonal CozyGrow Garden emails. I can unsubscribe anytime. See the <a href="/privacy" target="_blank" rel="noopener">privacy policy</a>.</span>
         </label>
-        <button class="btn btn--primary magazine-popup__submit" type="submit">Subscribe &amp; unlock the PDF</button>
         <p class="magazine-popup__status" id="autumnMagazineStatus" role="status" aria-live="polite"></p>
+        <button class="btn btn--primary magazine-popup__submit" type="submit">Subscribe &amp; unlock the PDF</button>
         <a class="magazine-popup__download" id="autumnMagazineDownload" href="/downloads/cozygrow-garden-autumn-september-november.pdf" download>Download the magazine</a>
         <p class="magazine-popup__fine">No spam, just seasonal garden notes from CozyGrow.</p>
       </form>
@@ -246,15 +246,47 @@
     let isSubmitting = false;
     let isSubscribed = false;
 
+    // Funnel events for Microsoft Clarity (no personal data is ever sent).
+    const track = (name) => {
+      try {
+        if (typeof window.clarity === 'function') window.clarity('event', name);
+      } catch (error) {
+        // Tracking must never break the popup.
+      }
+    };
+    const tracked = new Set();
+    const trackOnce = (name) => {
+      if (tracked.has(name)) return;
+      tracked.add(name);
+      track(name);
+    };
+
+    const consentLabel = form.querySelector('.magazine-popup__consent');
+    const clearInvalid = () => {
+      emailInput?.removeAttribute('aria-invalid');
+      consentInput?.removeAttribute('aria-invalid');
+      consentLabel?.classList.remove('is-invalid');
+    };
     const setStatus = (message, isError = false) => {
       if (!status) return;
       status.textContent = message;
       status.classList.toggle('is-error', isError);
+      // The dialog can be taller than the window, so make sure the message is seen.
+      if (message && isError) status.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     };
 
+    emailInput?.addEventListener('focus', () => trackOnce('magazine_email_focus'));
+    emailInput?.addEventListener('input', clearInvalid);
+    consentInput?.addEventListener('change', () => {
+      clearInvalid();
+      if (consentInput.checked) trackOnce('magazine_consent_checked');
+    });
+    download?.addEventListener('click', () => track('magazine_download_clicked'));
+
     let previousFocus = null;
-    const openPopup = () => {
+    const openPopup = (trigger = 'button') => {
       if (!popup.hidden) return;
+      track(trigger === 'auto' ? 'magazine_popup_opened_auto' : 'magazine_popup_opened_button');
       previousFocus = document.activeElement;
       popup.hidden = false;
       popup.classList.add('is-visible');
@@ -263,6 +295,7 @@
     };
 
     const closePopup = () => {
+      track(isSubscribed ? 'magazine_popup_closed_after_signup' : 'magazine_popup_closed_without_signup');
       popup.classList.remove('is-visible');
       popup.hidden = true;
       document.body.style.overflow = '';
@@ -289,15 +322,22 @@
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       if (isSubmitting || isSubscribed) return;
+      track('magazine_submit_clicked');
+      clearInvalid();
       const email = emailInput?.value.trim() || '';
       if (!emailInput?.checkValidity()) {
+        track('magazine_error_invalid_email');
+        emailInput?.setAttribute('aria-invalid', 'true');
         emailInput?.focus();
         setStatus('Please enter a valid email address.', true);
         return;
       }
       if (!consentInput?.checked) {
+        track('magazine_error_consent_missing');
+        consentInput?.setAttribute('aria-invalid', 'true');
+        consentLabel?.classList.add('is-invalid');
         consentInput?.focus();
-        setStatus('Please confirm that we can send you the magazine and garden emails.', true);
+        setStatus('Please tick the box above so we can send you the magazine and garden emails.', true);
         return;
       }
 
@@ -324,18 +364,22 @@
           throw new Error('Subscription not confirmed');
         }
         isSubscribed = true;
+        track('magazine_submit_success');
         if (download) {
           download.href = data.downloadUrl;
           download.classList.add('is-visible');
           download.focus();
+          download.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
         }
         writeStorage('localStorage', submittedKey, '1');
         const emailUnavailable = data.emailDelivery === 'failed' || data.emailDelivery === 'suppressed';
+        if (emailUnavailable) track('magazine_email_not_sent');
         setStatus(emailUnavailable
           ? 'You are subscribed. Your PDF is ready below. We could not send the email, so please download your copy here.'
           : 'You are subscribed. Your PDF is ready.');
         if (submit) submit.textContent = 'Subscribed';
       } catch (error) {
+        track(error && error.name === 'AbortError' ? 'magazine_error_timeout' : 'magazine_error_server');
         setStatus('We could not confirm your subscription. Please try again. Your email is still in the form.', true);
       } finally {
         window.clearTimeout(timeout);
@@ -344,11 +388,11 @@
       }
     });
 
-    window.CozyGrowAutumnMagazine = { open: openPopup };
+    window.CozyGrowAutumnMagazine = { open: () => openPopup('button') };
     if (shouldAutoOpen) {
       const delay = isFacebookTraffic || window.location.hash === '#magazine' ? 700 : 30000;
       window.setTimeout(() => {
-        if (!readStorage('localStorage', submittedKey) && !readStorage('sessionStorage', dismissedKey)) openPopup();
+        if (!readStorage('localStorage', submittedKey) && !readStorage('sessionStorage', dismissedKey)) openPopup('auto');
       }, delay);
     }
   })();
